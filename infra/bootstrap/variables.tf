@@ -12,7 +12,7 @@ variable "region" {
 variable "github_repo" {
   type        = string
   description = "GitHub org/repo allowed to assume the CI service accounts."
-  default     = "michalkaczmarczyk77/gcp-sandbox"
+  default     = "michalkaczmarczyk77/gcp-datamesh-platform"
 }
 
 variable "state_bucket_name" {

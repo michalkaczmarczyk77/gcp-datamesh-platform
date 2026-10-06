@@ -18,9 +18,3 @@ variable "location" {
   description = "BigQuery dataset location."
   default     = "europe-central2"
 }
-
-variable "sql_password" {
-  type        = string
-  description = "SQL password"
-  default     = "MyS0LP@ssw0rT!"
-}
