@@ -1,8 +1,8 @@
-# Reference Data Transformation Platform on GCP — Implementation & Deployment Plan
+# Platforma do Transformatacji Danych na GCP — Plan Implementacji i Wdrożenia
 
-## 0. Target architecture
+## 0. Architektura docelowa
 
-> **Orchestrator choice:** this plan runs Airflow **self-hosted on GKE Autopilot** (Helm chart + `KubernetesExecutor`) as the primary path — only the scheduler/webserver pods run continuously, and task pods scale to zero between runs, which is materially cheaper than Cloud Composer for a weekend build. Composer remains fully viable and is documented as a drop-in managed alternative in Appendix A at the end of this document.
+> **Wybór orkiestratora:** ten plan uruchamia Airflow **hostowany samodzielnie na GKE Autopilot** (Helm chart + `KubernetesExecutor`) jako ścieżka główna — tylko kontenery schedulera/webserwera działają ciągle, a kontenery zadań skalują do zera między wykonaniami, co jest materialnie tańsze niż Cloud Composer dla projektu weekendowego. Composer pozostaje w pełni aktywny i jest udokumentowany jako alternatywa zarządzana dostępna drop-in w Dodatku A na końcu tego dokumentu.
 
 ```mermaid
 flowchart LR
@@ -86,7 +86,7 @@ for P in dtp-ref-dev dtp-ref-prd; do
 done
 ```
 
-### Step 1.3 — Bootstrap Terraform state bucket (the only click-ops you allow yourself)
+### Krok 1.3 — Bootstrap Terraform state bucket (the only click-ops you allow yourself)
 
 ```bash
 gcloud storage buckets create gs://dtp-ref-tfstate \
@@ -230,7 +230,7 @@ Both CI (validation, dependency-graph rendering) and Terraform (via `yamldecode`
 
 ## Phase 3 — Terraform: infrastructure modules (≈2 h)
 
-### Step 3.1 — Backend & providers (`infra/envs/dev/backend.tf`)
+### Krok 3.1 — Backend & providers (`infra/envs/dev/backend.tf`)
 
 ```hcl
 terraform {
@@ -289,7 +289,7 @@ resource "google_bigquery_dataset_iam_member" "consumers" {
 }
 ```
 
-### Step 3.3 — `modules/data_product_topic` (the synchronization backbone)
+### Krok 3.3 — `modules/data_product_topic` (the synchronization backbone)
 
 ```hcl
 resource "google_pubsub_schema" "release_event" {
@@ -344,7 +344,7 @@ resource "google_pubsub_subscription" "consumer" {
 }
 ```
 
-### Step 3.4 — `modules/airflow_gke` (self-hosted Airflow on GKE Autopilot)
+### Krok 3.4 — `modules/airflow_gke` (self-hosted Airflow on GKE Autopilot)
 
 A GKE Autopilot cluster + a small Cloud SQL metadata DB + a Helm release of the official Airflow chart, wired through GKE Workload Identity — no keys anywhere.
 
@@ -538,7 +538,7 @@ This is the single most important structural move: **the dependency graph betwee
 
 ## Phase 4 — dbt project (≈1.5 h)
 
-### Step 4.1 — `domains/sales/dbt/dbt_project.yml`
+### Krok 4.1 — `domains/sales/dbt/dbt_project.yml`
 
 ```yaml
 name: sales
@@ -600,7 +600,7 @@ sales:
       threads: 8
 ```
 
-### Step 4.3 — `macros/generate_schema_name.sql`
+### Krok 4.3 — `macros/generate_schema_name.sql`
 
 Prevents dbt's default `<target_schema>_<custom_schema>` concatenation:
 
@@ -634,7 +634,7 @@ sources:
 
 **Rule to enforce in CI:** a domain may only `source()` another domain's `mart` layer, never `ref()` across domains. This is what makes later repo extraction mechanical.
 
-### Step 4.5 — Reference models to build (minimal but realistic)
+### Krok 4.5 — Reference models to build (minimal but realistic)
 
 ```
 sales/models/
@@ -654,7 +654,7 @@ Use `bigquery-public-data.thelook_ecommerce` as the raw source so you have real 
 
 ## Phase 5 — Airflow DAGs with Cosmos (≈1.5 h)
 
-### Step 5.1 — DAG factory (`platform/dags_common/cosmos_factory.py`)
+### Krok 5.1 — DAG factory (`platform/dags_common/cosmos_factory.py`)
 
 ```python
 from pathlib import Path
@@ -731,7 +731,7 @@ def publish_release(domain: str, product: dict, **context):
     return payload
 ```
 
-### Step 5.3 — Producer DAG (`domains/sales/dags/sales_daily_dag.py`)
+### Krok 5.3 — Producer DAG (`domains/sales/dags/sales_daily_dag.py`)
 
 ```python
 from airflow.decorators import dag
@@ -803,7 +803,7 @@ dbt source freshness --select source:sales
 
 This turns "the producer said it was done" into "the data actually is fresh", which is what you want when the event bus has an outage.
 
-### Step 5.5 — Idempotency and late/duplicate events
+### Krok 5.5 — Idempotency and late/duplicate events
 
 Pub/Sub is at-least-once. Guard with:
 - `ack_messages=True` + a BigQuery `_dtp_processed_events` table keyed on `event_id`, checked in `validate_freshness`.
@@ -816,7 +816,7 @@ Pub/Sub is at-least-once. Guard with:
 
 Three workflows, all keyless via WIF.
 
-### Step 6.1 — `ci-terraform.yml` (PR: plan / main: apply)
+### Krok 6.1 — `ci-terraform.yml` (PR: plan / main: apply)
 
 ```yaml
 name: ci-terraform
@@ -909,7 +909,7 @@ jobs:
 
 Add a `pr-closed.yml` that drops `ci_pr_<n>` on PR close as a safety net, plus a `default_table_expiration_ms` on CI datasets so orphans self-clean.
 
-### Step 6.3 — `cd-deploy.yml` (main → GKE via Helm)
+### Krok 6.3 — `cd-deploy.yml` (main → GKE via Helm)
 
 ```yaml
 name: cd-deploy
