@@ -1,3 +1,4 @@
+#TODO: przygotować pełne środowisko developerskie: Helm, opencode, git, gcloud, k9s, kubectl
 FROM python:3.12.2-slim
 WORKDIR /root
 
