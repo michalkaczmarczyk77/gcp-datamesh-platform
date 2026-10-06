@@ -34,8 +34,8 @@ resource "random_password" "airflow_db" {
 resource "google_sql_user" "airflow" {
   name     = "airflow"
   instance = google_sql_database_instance.airflow_meta.name
-  #password = random_password.airflow_db.result
-  password = "MyS0LP@ssw0rT!"
+  password = random_password.airflow_db.result
+  #password = "MyS0LP@ssw0rT!"
 }
 
 resource "google_service_account" "airflow_gsa" {
@@ -80,8 +80,8 @@ resource "helm_release" "airflow" {
 
   set_sensitive {
     name  = "data.metadataConnection.pass"
-    #value = random_password.airflow_db.result
-    value = "MyS0LP@ssw0rT!"
+    value = random_password.airflow_db.result
+    #value = "MyS0LP@ssw0rT!"
   }
 
   depends_on = [google_container_cluster.airflow, google_sql_database.airflow, google_sql_user.airflow]
