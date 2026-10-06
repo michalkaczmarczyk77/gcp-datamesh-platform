@@ -1,0 +1,92 @@
+executor: KubernetesExecutor # task pods scale to zero between runs
+statsd:
+  enabled: false # not needed in the small dev sandbox
+redis:
+  enabled: false # KubernetesExecutor does not use the Celery broker
+postgresql:
+  enabled: false # use external Cloud SQL, not the chart's bundled Postgres
+images:
+  airflow:
+    repository: europe-central2-docker.pkg.dev/dtp-ref-dev/dtp-artifact-registry/airflow-dbt
+    tag: 035736b95f322e25d95bdd2cfcf3116f3bec6774
+    #tag: latest # CI pins the real tag via `helm upgrade --set images.airflow.tag=<sha>`
+
+# Applied to every Airflow container (scheduler/webserver/worker/triggerer).
+# Read by platform/dags_common (data_product.py, freshness.py) and by each
+# domain's dbt profiles.yml via env_var().
+env:
+  - name: GCP_PROJECT
+    value: "dtp-ref-dev"
+  - name: DTP_ENV
+    value: "dev"
+  - name: DTP_BQ_LOCATION
+    value: "europe-central2"
+
+webserver:
+  replicas: 1
+  resources: { requests: { cpu: "250m", memory: "512Mi" } }
+  extraContainers:
+    - name: cloud-sql-proxy
+      image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.14.0 # pin to latest 2.x at deploy time
+      args: ["--structured-logs", "--port=5432", "dtp-ref-dev:europe-central2:airflow-meta-dev"]
+      securityContext: { runAsNonRoot: true }
+      resources: { requests: { cpu: "50m", memory: "128Mi" } }
+
+scheduler:
+  replicas: 1
+  resources: { requests: { cpu: "250m", memory: "512Mi" } }
+  extraContainers:
+    - name: cloud-sql-proxy
+      image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.14.0
+      args: ["--structured-logs", "--port=5432", "dtp-ref-dev:europe-central2:airflow-meta-dev"]
+      securityContext: { runAsNonRoot: true }
+      resources: { requests: { cpu: "50m", memory: "128Mi" } }
+  serviceAccount:
+    create: true
+    name: airflow-scheduler
+    annotations:
+      iam.gke.io/gcp-service-account: sa-airflow-dev@dtp-ref-dev.iam.gserviceaccount.com
+
+triggerer:
+  enabled: false # enable only if you use deferrable sensors (PubSubPullSensor deferrable=True)
+  replicas: 2
+  persistence: 
+    size: 1Gi
+
+data:
+  metadataConnection:
+    protocol: postgresql
+    host: 127.0.0.1 # via the Cloud SQL Auth Proxy sidecar above
+    user: airflow
+    db: airflow
+    port: 5432
+    # .pass is injected by Terraform: helm_release.airflow's set_sensitive block
+    # (infra/modules/airflow_gke/main.tf), never committed here.
+
+workers:
+  resources: { requests: { cpu: "250m", memory: "512Mi" } }
+  # KubernetesExecutor task pods are spawned from this pod template, so they
+  # need the sidecar too — each task talks to the metadata DB directly.
+  extraContainers:
+    - name: cloud-sql-proxy
+      image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.14.0
+      args: ["--structured-logs", "--port=5432", "dtp-ref-dev:europe-central2:airflow-meta-dev"]
+      securityContext: { runAsNonRoot: true }
+      resources: { requests: { cpu: "50m", memory: "128Mi" } }
+  serviceAccount:
+    create: false
+    name: airflow-scheduler
+
+dags:
+  gitSync:
+    enabled: true
+    repo: https://github.com/michalkaczmarczyk77/dbt-bq-python-slim
+    branch: main
+    subPath: "WeekendProject/domains"
+    # credentialsSecret: airflow-git-credentials  # deploy key/PAT — see Highest-risk item #2 in the plan
+
+serviceAccount:
+  create: true
+  name: airflow-scheduler
+  annotations:
+    iam.gke.io/gcp-service-account: sa-airflow-dev@dtp-ref-dev.iam.gserviceaccount.com

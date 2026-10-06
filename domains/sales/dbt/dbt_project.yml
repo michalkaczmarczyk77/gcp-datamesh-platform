@@ -1,0 +1,26 @@
+name: sales
+version: "1.0.0"
+config-version: 2
+profile: sales
+
+model-paths: ["models"]
+target-path: "target"
+
+vars:
+  gcp_project: "{{ env_var('GCP_PROJECT') }}"
+  dtp_env: "{{ env_var('DTP_ENV', 'dev') }}"
+
+models:
+  sales:
+    +persist_docs: { relation: true, columns: true }
+    staging:
+      +materialized: view
+      +schema: staging
+    intermediate:
+      +materialized: ephemeral
+    marts:
+      +materialized: incremental
+      +incremental_strategy: insert_overwrite
+      +partition_by: { field: order_date, data_type: date, granularity: day }
+      +schema: mart
+      +labels: { domain: sales, layer: mart }

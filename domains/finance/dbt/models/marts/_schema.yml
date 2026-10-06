@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: fct_revenue
+    description: >
+      Finance data product — daily gross revenue by country, derived from
+      sales.fct_orders via source() (Step 4.4). Publication is announced on
+      the dtp.finance.fct_revenue.released Pub/Sub topic after this model builds.
+    columns:
+      - name: revenue_date
+        tests:
+          - not_null
+      - name: country
+        tests:
+          - not_null
+      - name: gross_revenue
+        tests:
+          - not_null

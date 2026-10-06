@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: thelook_ecommerce
+    project: bigquery-public-data
+    dataset: thelook_ecommerce
+    description: "Public sample e-commerce dataset — day-one real data for the sales domain (Phase 4 / Step 4.5)."
+    tables:
+      - name: orders
+      - name: users
+      - name: order_items

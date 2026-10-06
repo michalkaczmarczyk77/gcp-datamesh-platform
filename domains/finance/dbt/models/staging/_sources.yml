@@ -1,0 +1,14 @@
+version: 2
+sources:
+  - name: sales # the contract boundary
+    project: "{{ env_var('GCP_PROJECT') }}"
+    schema: sales_mart
+    tables:
+      - name: fct_orders
+        loaded_at_field: _dbt_loaded_at
+        freshness:
+          warn_after: { count: 26, period: hour }
+          error_after: { count: 48, period: hour }
+
+# Rule enforced in CI: a domain may only source() another domain's mart
+# layer, never ref() across domains (Phase 4 / Step 4.4).

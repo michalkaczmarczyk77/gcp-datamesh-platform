@@ -1,0 +1,66 @@
+executor: KubernetesExecutor
+images:
+  airflow:
+    repository: europe-central2-docker.pkg.dev/dtp-ref-prd/dtp/airflow-dbt
+    tag: latest # CI pins the real tag via `helm upgrade --set images.airflow.tag=<sha>`
+
+env:
+  - name: GCP_PROJECT
+    value: "dtp-ref-prd"
+  - name: DTP_ENV
+    value: "prd"
+  - name: DTP_BQ_LOCATION
+    value: "europe-central2"
+
+apiServer:
+  replicas: 1
+  resources: { requests: { cpu: "500m", memory: "1Gi" } }
+  extraContainers:
+    - name: cloud-sql-proxy
+      image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.14.0
+      args: ["--structured-logs", "--port=5432", "dtp-ref-prd:europe-central2:airflow-meta-prd"]
+      securityContext: { runAsNonRoot: true }
+
+scheduler:
+  replicas: 1
+  resources: { requests: { cpu: "500m", memory: "1Gi" } }
+  extraContainers:
+    - name: cloud-sql-proxy
+      image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.14.0
+      args: ["--structured-logs", "--port=5432", "dtp-ref-prd:europe-central2:airflow-meta-prd"]
+      securityContext: { runAsNonRoot: true }
+
+triggerer:
+  enabled: false
+
+postgresql:
+  enabled: false
+
+data:
+  metadataConnection:
+    protocol: postgresql
+    host: 127.0.0.1
+    user: airflow
+    db: airflow
+    port: 5432
+
+workers:
+  resources: { requests: { cpu: "500m", memory: "1Gi" } }
+  extraContainers:
+    - name: cloud-sql-proxy
+      image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.14.0
+      args: ["--structured-logs", "--port=5432", "dtp-ref-prd:europe-central2:airflow-meta-prd"]
+      securityContext: { runAsNonRoot: true }
+
+dags:
+  gitSync:
+    enabled: true
+    repo: https://github.com/<org>/data-transformation-platform.git
+    branch: main
+    subPath: "domains"
+
+serviceAccount:
+  create: true
+  name: airflow-scheduler
+  annotations:
+    iam.gke.io/gcp-service-account: sa-airflow-prd@dtp-ref-prd.iam.gserviceaccount.com

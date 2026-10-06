@@ -1,0 +1,16 @@
+{
+  "type": "record", "name": "DataProductRelease",
+  "fields": [
+    {"name": "event_id",        "type": "string"},
+    {"name": "domain",          "type": "string"},
+    {"name": "product",         "type": "string"},
+    {"name": "fq_table",        "type": "string"},
+    {"name": "logical_date",    "type": "string"},
+    {"name": "run_id",          "type": "string"},
+    {"name": "dbt_invocation_id","type": "string"},
+    {"name": "row_count",       "type": "long"},
+    {"name": "status",          "type": {"type":"enum","name":"Status","symbols":["SUCCESS","PARTIAL","FAILED"]}},
+    {"name": "published_at",    "type": "string"},
+    {"name": "schema_version",  "type": "int"}
+  ]
+}

@@ -1,0 +1,7 @@
+#astronomer-cosmos==1.9.2
+astronomer-cosmos==1.10.1
+#astronomer-cosmos[dbt-bigquery]
+dbt-core==1.9.3
+dbt-bigquery==1.9.1
+#dbt-core
+#dbt-bigquery

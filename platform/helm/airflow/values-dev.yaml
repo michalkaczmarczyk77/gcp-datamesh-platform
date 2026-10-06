@@ -1,0 +1,61 @@
+createUserJob:
+  useHelmHooks: false
+  applyCustomEnv: false
+
+migrateDatabaseJob:
+  useHelmHooks: false
+  applyCustomEnv: false
+
+executor: KubernetesExecutor
+images:
+  airflow:
+    repository: europe-central2-docker.pkg.dev/dtp-ref-dev/dtp-artifact-registry/airflow-dbt
+    tag: 035736b95f322e25d95bdd2cfcf3116f3bec6774 # CI pins the real tag via `helm upgrade --set images.airflow.tag=<sha>`
+
+env:
+  - name: GCP_PROJECT
+    value: "dtp-ref-dev"
+  - name: DTP_ENV
+    value: "dev"
+  - name: DTP_BQ_LOCATION
+    value: "europe-central2"
+
+apiServer:
+  replicas: 1
+  resources: { requests: { cpu: "500m", memory: "1Gi" } }
+
+scheduler:
+  replicas: 1
+  resources: { requests: { cpu: "500m", memory: "1Gi" } }
+
+triggerer:
+  enabled: false
+
+postgresql:
+  enabled: false
+
+statsd:
+  enabled: false
+
+data:
+  metadataConnection:
+    host: cloud-sql-proxy.airflow.svc.cluster.local
+    port: 5432
+    user: airflow
+    db: airflow
+
+workers:
+  resources: { requests: { cpu: "500m", memory: "1Gi" } }
+
+dags:
+  gitSync:
+    enabled: true
+    repo: https://github.com/michalkaczmarczyk77/dbt-bq-python-slim
+    branch: main
+    subPath: "WeekendProject/domains"
+
+serviceAccount:
+  create: true
+  name: airflow-scheduler
+  annotations:
+    iam.gke.io/gcp-service-account: sa-airflow-dev@dtp-ref-dev.iam.gserviceaccount.com

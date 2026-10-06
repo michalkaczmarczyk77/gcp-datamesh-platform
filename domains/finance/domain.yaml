@@ -1,0 +1,12 @@
+domain: finance
+schedule: null # event-driven only
+produces: # data products this domain publishes
+  - name: fct_revenue
+    dataset: finance_mart
+    table: fct_revenue
+    topic: dtp.finance.fct_revenue.released
+consumes: # upstream products this domain waits for
+  - domain: sales
+    product: fct_orders
+    topic: dtp.sales.fct_orders.released
+    max_staleness_hours: 26

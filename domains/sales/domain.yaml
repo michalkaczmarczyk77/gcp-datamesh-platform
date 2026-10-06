@@ -1,0 +1,13 @@
+domain: sales
+owner: sales-data-team@example.com
+schedule: "0 3 * * *"
+dbt:
+  project_dir: domains/sales/dbt
+  target_dataset_prefix: sales
+produces: # data products this domain publishes
+  - name: fct_orders
+    dataset: sales_mart
+    table: fct_orders
+    sla_minutes: 120
+    topic: dtp.sales.fct_orders.released
+consumes: [] # upstream products this domain waits for

@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: fct_orders
+    description: >
+      Sales data product — one row per order. Published to sales_mart;
+      consumed by other domains via `source()` only (see Step 4.4), never
+      direct `ref()`. Publication is announced on the
+      dtp.sales.fct_orders.released Pub/Sub topic after this model builds.
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+      - name: user_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_customers')
+              field: user_id
+      - name: status
+        tests:
+          - not_null
+      - name: order_date
+        tests:
+          - not_null

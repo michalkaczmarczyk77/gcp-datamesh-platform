@@ -1,0 +1,43 @@
+{
+  "name": "gcp-datamesh-platform-devcontainer",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "."
+  },
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+  "workspaceFolder": "/workspace",
+//  "mounts": [
+//    "source=${localWorkspaceFolder},target=/workspace/dbt,type=bind,consistency=cached"
+//  ],
+  "containerEnv": {
+    "DBT_PROFILES_DIR": "/workspace/.dbt",
+    "GOOGLE_APPLICATION_CREDENTIALS": "/root/.keys/gcloud/lmpl-data-dev-e35-7cec2ad5559f.json",
+    "GCP_PROJECT_ID": "lmpl-data-dev-e35" 
+  }
+//  ,"remoteEnv": { 
+//    "DBT_PROFILES_DIR": "/workspace/dbt/.dbt",
+//    "GOOGLE_APPLICATION_CREDENTIALS": "/root/.keys/gcloud/lmpl-data-dev-e35-7cec2ad5559f.json",
+//    "GCP_PROJECT_ID": "lmpl-data-dev-e35" 
+//  }
+  ,"customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.debugpy",
+        "ms-toolsai.jupyter",
+        "innoverio.vscode-dbt-power-user",
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "grantfbarnes.sqlfmt",
+        "hashicorp.terraform"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "files.eol": "\n",
+        "terminal.integrated.defaultProfile.linux": "bash"
+      } 
+    }
+  }
+  ,"postCreateCommand": "echo 'alias ll=\"ls -alF\"' >> ~/.bashrc"
+}
