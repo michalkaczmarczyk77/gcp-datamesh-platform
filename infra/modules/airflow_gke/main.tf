@@ -73,7 +73,7 @@ resource "helm_release" "airflow" {
   repository       = "https://airflow.apache.org"
   chart            = "airflow"
   #version          = "1.16.0" # Newest: 1.22.0 []; chart's own default Airflow image is 2.10.5 here - matches the Dockerfile below
-  version          = "1.22.0" # Newest: 1.22.0 []; chart's own default Airflow image is 2.10.5 here - matches the Dockerfile below
+  version          = "1.22.0" # Newest: 1.22.0 []; chart's own default Airflow image is 3
   namespace        = "airflow"
   create_namespace = true
   values           = [file("${path.module}/../../../platform/helm/airflow/values-${var.env}.yaml")]
