@@ -1,20 +1,19 @@
 variable "project_id" {
   type        = string
-  description = "dtp-ref-dev"
+  description = "GCP project that hosts the solution"
 }
 
 variable "env" {
   type    = string
-  default = "dev"
+  description = "Environment"
 }
 
 variable "region" {
   type    = string
-  default = "europe-central2"
+  description = "Region"
 }
 
 variable "location" {
   type        = string
   description = "BigQuery dataset location."
-  default     = "europe-central2"
 }

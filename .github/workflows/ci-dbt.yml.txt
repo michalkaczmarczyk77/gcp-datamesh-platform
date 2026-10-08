@@ -1,0 +1,86 @@
+name: CD - Deploy Docker Image
+on: { push: { branches: [main], paths: ["domains/**", "platform/**"] } }
+
+env:
+  GCP_PROJECT: dtp-ref-dev
+  DTP_ENV: dev
+  REGION: europe-central2
+
+permissions: { contents: read, id-token: write }
+
+jobs:
+  deploy:
+    #strategy: { max-parallel: 1, matrix: { env: [dev, prd] } }
+    strategy: { max-parallel: 1, matrix: { env: [dev] } }
+    environment: ${{ matrix.env }}          # prd requires manual approval
+
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Action - Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v2
+        with:
+          #token_format: 'access_token'
+          workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
+          service_account: ${{ secrets.SA_DEPLOY }}
+
+      - name: Action - Setup Python environment
+        uses: actions/setup-python@v5
+        with: { python-version: "3.14" }
+
+      - name: Install dbt packages
+        run: |
+          pip install dbt-bigquery==1.12.0
+          dbt --version
+
+      # 1. Compile each domain -> produces target/manifest.json used by Cosmos at parse time
+      - name: Compile dbt manifests
+        run: |
+          for d in domains/*/; do
+            (cd $d/dbt && dbt deps && dbt compile --target ${{ matrix.env }} --no-version-check)
+          done
+        env: { GCP_PROJECT: "dtp-ref-${{ matrix.env }}", DTP_ENV: "${{ matrix.env }}" }
+
+      # 2. Build & push the custom Airflow image — DAGs themselves are pulled live by git-sync, no rsync needed
+      - name: Action - Set up gcloud
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Build and push Airflow image
+        run: |
+          gcloud auth configure-docker europe-central2-docker.pkg.dev --quiet
+          IMAGE=${{ env.REGION }}-docker.pkg.dev/dtp-ref-${{ matrix.env }}/dtp-artifact-registry/airflow-dbt:${{ github.sha }}
+          docker build -t $IMAGE -f platform/docker/airflow/Dockerfile platform/docker/airflow
+          docker push $IMAGE
+          echo "===== Github:SHA >>>> ${{ github.sha }}"
+
+      # 3. Point Helm at the cluster Terraform created, and roll out the new image tag
+      #- name: Helm upgrade
+      #  run: |
+      #    gcloud container clusters get-credentials airflow-${{ matrix.env }} \
+      #      --region ${{ env.REGION }} --project dtp-ref-${{ matrix.env }}
+      #    helm repo add apache-airflow https://airflow.apache.org
+      #    helm upgrade airflow apache-airflow/airflow \
+      #      --namespace airflow --reuse-values \
+      #      --set images.airflow.repository=${{ env.REGION }}-docker.pkg.dev/dtp-ref-${{ matrix.env }}/dtp/airflow-dbt \
+      #      --set images.airflow.tag=${{ github.sha }} \
+      #      --wait --timeout 10m
+
+      # 4. Publish the production manifest for the next PR's Slim CI
+      - name: Publish DBT manifests
+        if: matrix.env == 'dev'
+        run: |
+          for d in domains/*/; do
+            n=$(basename $d)
+            gcloud storage cp $d/dbt/target/manifest.json \
+              gs://dtp-ref-artifacts/manifests/$n/${{ matrix.env }}/manifest.json
+          done
+
+      #- name: Smoke test — DAGs import cleanly
+      #  run: |
+      #    kubectl -n airflow rollout status deployment/airflow-scheduler --timeout=300s
+      #    kubectl -n airflow exec deploy/airflow-scheduler -- \
+      #      airflow dags list-import-errors 2>&1 | tee errs.txt
+      #    grep -q "No data found" errs.txt || (cat errs.txt && exit 1)

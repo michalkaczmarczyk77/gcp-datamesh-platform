@@ -9,14 +9,14 @@
 # IAM Principal: principal://iam.googleapis.com/projects/571278907342/locations/global/workloadIdentityPools/dtp-github-pool/subject/SUBJECT_ATTRIBUTE_VALUE
 resource "google_iam_workload_identity_pool" "github" {
   project                   = var.project_id
-  workload_identity_pool_id = "dtp-github-pool"
+  workload_identity_pool_id = var.wif_pool
   display_name              = "Data Platform GitHub Actions"
 }
 
 resource "google_iam_workload_identity_pool_provider" "github" {
   project                            = var.project_id
   workload_identity_pool_id          = google_iam_workload_identity_pool.github.workload_identity_pool_id
-  workload_identity_pool_provider_id = "dtp-github-provider"
+  workload_identity_pool_provider_id = var.wif_pool_github_provider
 
   attribute_mapping = {
     "google.subject"       = "assertion.sub"

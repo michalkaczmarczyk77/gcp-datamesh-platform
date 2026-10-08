@@ -1,12 +1,20 @@
 export BILLING="014F34-F31ECD-3A639F"
-export TF_STATE_BUCKET="dtp-ref-tfstate"
-export PROJECT_DEV="dtp-ref-dev"
-export PROJECT_PRD="dtp-ref-prd"
-export PROJECT_ID=$PROJECT_DEV
+export SOLUTION="dtp-ref"
+export GCP_ENVIRONMENT="dev"
 export REGION="europe-central2"
+export PROJECT_INIT="caymanek-sandbox"
+export GCP_ARTIFACT_REGISTRY="dtp-artifact-registry"
+export TAG="3.3.2-python3.14"
+
+export GCP_DOCKER_REPO=${REGION}-docker.pkg.dev
+export TF_STATE_BUCKET="${SOLUTION}-tfstate"
+export PROJECT_DEV="${SOLUTION}-dev"
+export PROJECT_PRD="${SOLUTION}-prd"
+export PROJECT_ID=${SOLUTION}-${GCP_ENVIRONMENT}
+export IMAGE=${GCP_DOCKER_REPO}/${PROJECT_ID}/${GCP_ARTIFACT_REGISTRY}/airflow-dbt:${TAG}
 
 gcloud auth login
-gcloud config set project caymanek-sandbox
+gcloud config set project ${PROJECT_INIT}
 
 # Create projects
 gcloud projects create $PROJECT_DEV --name="DTP Reference Dev"
@@ -48,11 +56,23 @@ gcloud storage ls
 ### TERRAFORM BOOTSTRAP ###
 gcloud auth application-default login
 
-terraform init
-terraform apply
+### Zbudowanie obrasu Airflow
 
-# sa_dbt_ci_email = "sa-dbt-ci@dtp-ref-dev.iam.gserviceaccount.com"
-# sa_deploy_email = "sa-deploy@dtp-ref-dev.iam.gserviceaccount.com"
-# sa_tf_apply_email = "sa-tf-apply@dtp-ref-dev.iam.gserviceaccount.com"
-# sa_tf_plan_email = "sa-tf-plan@dtp-ref-dev.iam.gserviceaccount.com"
-# wif_provider = "projects/dtp-ref-dev/locations/global/workloadIdentityPools/github-pool/providers/github-provider"
+# Inicjalna budowa obrazu dokerowego dla Airflow i umieszczenie w repozytorium
+
+gcloud auth configure-docker $GCP_DOCKER_REPO --quiet
+docker build -t $IMAGE -f ../../platform/docker/airflow/Dockerfile ../../platform/docker/airflow
+docker images
+docker push $IMAGE
+
+
+#cd ./core
+#terraform init
+#terraform plan  -var-file="../${PROJECT_DEV}.tfvars"
+#terraform apply -var-file="../${PROJECT_DEV}.tfvars"
+#cd ..
+
+terraform init
+terraform plan  -var-file="${PROJECT_DEV}.tfvars"
+terraform apply -var-file="${PROJECT_DEV}.tfvars"
+
