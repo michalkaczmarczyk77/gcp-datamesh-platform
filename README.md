@@ -2,6 +2,8 @@
 
 Projekt z założenia był ***"projektem weekendowym"***, czyli szybkim, eksperymentalnym, zakończonym prototypową implementacją procesem wytwórczym: od koncepcji, przez analizę wykonalności, implementację i wdrożenie.
 
+[Draw.io: High Level Conceptual Diagram](docs/WeekendProject.drawio)
+
 Aktualnie nie jest to produkt kompletny gotowy do użycia produkcyjnego. Nie został w pełni przetestowany i obarczony jest (najprawdopodobniej) błędami - które będą eliminowane podczas dalszych prac i testów.
 
 ### Sposób podejścia do realizacji projektu

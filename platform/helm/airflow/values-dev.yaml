@@ -50,9 +50,9 @@ workers:
 dags:
   gitSync:
     enabled: true
-    repo: https://github.com/michalkaczmarczyk77/dbt-bq-python-slim
+    repo: https://github.com/michalkaczmarczyk77/gcp-datamesh-platform
     branch: main
-    subPath: "WeekendProject/domains"
+    subPath: "domains"
 
 serviceAccount:
   create: true
