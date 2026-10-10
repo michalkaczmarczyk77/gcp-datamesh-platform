@@ -18,21 +18,23 @@ Praca została podzielona na etapy:
 
 1. **Część analityczna**
   
-    Odbywała się w kilku iteracjach. Po każdej z nich, dokonywana była ewaluacja proponowanych przez model rozwiązań. Badane były motywacje, które stały za podjętymi decyzjami. W ramach tych iteracji proponowałem rozważanie innych podejść, które miały być wsadem do wypracowania w kolejnych iteracji.
+    Odbywała się w kilku iteracjach. Po każdej z nich, dokonywana była ewaluacja proponowanych przez model rozwiązań. Badane były motywacje, które stały za podjętymi decyzjami. W ramach tych iteracji proponowałem rozważanie innych podejść, które miały być wsadem do wypracowania w kolejnych iteracji. 
 
-    Po kilku iteracjach tworzony był dokument analityczny opisujący decyzje, sposób implementacji i rozważane inne rozwiązania. Takie dokument stanowiły element uzupełniający kontekst konwersacji, przed kolejnymi iteracjami. 
+    Finalnie został stworzony dokument specyfikacji, w którym opisane były decyzje, proponowana architektura rozwiązania i inne scenariusze brane pod uwagę w trakcie sesji analitycznej. 
+    
+    Celem dokumentu było uzupełnienie kontekst konwersacji, kolejnego etapu - "Generatywnego". 
 
 2. **Część "generatywna"**
 
-    Ta część również odbywała się w kilku iteracjach. Model działający w trybie *Agent* miał za zadanie wygenerowanie kompletnego repozytorium kodu, zawierającego wszystkie elementy potrzebne do stworzenia i uruchomienia rozwiązania. Na tym etapie, Agent nie uruchamiał i nie tworzył żadnych elementów infrastruktury, jedynie kod i instrukcje jak należy kod wdrożyć. 
+    Ta część odbywała się w kilku iteracjach. Na podstawie specyfikacji z poprzedniego kroku, Model działający w trybie *Agent* miał za zadanie wygenerowanie kompletnego repozytorium kodu, zawierającego wszystkie elementy potrzebne do stworzenia i uruchomienia rozwiązania. Na tym etapie, Agent nie uruchamiał i nie tworzył żadnych elementów infrastruktury, jedynie kod i instrukcje jak należy kod wdrożyć. 
 
     Po każdej iteracji, dostarczony kod był weryfikowany i jeszcze raz ewaluowany z Agentem. W trakcie fazy walidacji, wykonywane były modyfikacje/ulepszanie kodu i budowana była baza wiedzy. 
 
 3. **Część wdrożeniowa**
 
-    Najdłuższy etap projektu. Przeprowadzany ręcznie, krok po kroku. Udział LLM, ograniczał się do udzielania odpowiedzi technicznych dotyczących poszczególnych elementów rozwiązania i poszerzania swojej wiedzy. Model wykorzystywany był również do wsparcia podczas rozwiązywania problemów, których było wiele - począwszy od niekompatybilności bibliotek Python w ramach Docker, skończywszy na kompletnej zmianie sposobu i kolejności deploymentu poszczególnych elementów w ramach klastra GKE.
+    Najdłuższy etap projektu. Przeprowadzany ręcznie, krok po kroku. Udział LLM, ograniczał się do udzielania odpowiedzi technicznych dotyczących poszczególnych elementów rozwiązania i poszerzania swojej wiedzy. Model wykorzystywany był również jako wsparcie przy rozwwiązywaniu problemów napotkanych podczas wdrażania. Problemy z jakimi mierzyłem się na tym etapie objemowały zakres począwszy od niekompatybilności bibliotek Python w ramach Docker, skończywszy na kompletnej zmianie sposobu i kolejności deploymentu poszczególnych elementów w ramach klastra GKE.
 
-    Na tym etapie, zostało dokonanych wiele modyfikacji, wcześniej wygenerowanego kodu. Finalnie, całe rozwiazanie zostało wdrożone. Wszystkie komponenty architektury zostały osadzone w ramach GCP. 
+    Na tym etapie, dokonałem wielu modyfikacji, wcześniej wygenerowanego kodu. Finalnie, całe rozwiazanie zostało wdrożone. Wszystkie komponenty architektury zostały osadzone w ramach GCP. 
 
     ***Na tym etapie nie zostały wykonane testy funkcjonalne. To zadanie czeka jeszcze w kolejce.***
 

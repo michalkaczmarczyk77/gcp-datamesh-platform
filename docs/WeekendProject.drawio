@@ -1,6 +1,6 @@
 <mxfile host="Electron">
   <diagram name="Page-1" id="xgLNfRt65BB5RLUHj3e0">
-    <mxGraphModel dx="2566" dy="3191" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+    <mxGraphModel dx="1770" dy="2728" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -134,7 +134,7 @@
           <mxGeometry height="60" width="120" x="150" y="100" as="geometry" />
         </mxCell>
         <mxCell id="9c0FLtZcMj3uGaz4306t-44" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Helm (apache-airflow/airflow)" vertex="1">
-          <mxGeometry height="200" width="420" x="40" y="-329" as="geometry" />
+          <mxGeometry height="279" width="420" x="40" y="-329" as="geometry" />
         </mxCell>
         <mxCell id="LE2pHzFudx2AgH_AYsHD-1" parent="9c0FLtZcMj3uGaz4306t-44" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="ApiServer" vertex="1">
           <mxGeometry height="60" width="120" x="20" y="46" as="geometry" />
@@ -153,6 +153,9 @@
         </mxCell>
         <mxCell id="LE2pHzFudx2AgH_AYsHD-4" parent="9c0FLtZcMj3uGaz4306t-44" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#929292;" value="Statsd" vertex="1">
           <mxGeometry height="60" width="120" x="280" y="116" as="geometry" />
+        </mxCell>
+        <mxCell id="4GeEt0LQDJS65V53ZmVl-1" parent="9c0FLtZcMj3uGaz4306t-44" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="DAG Processor" vertex="1">
+          <mxGeometry height="60" width="120" x="150" y="186" as="geometry" />
         </mxCell>
         <mxCell id="9c0FLtZcMj3uGaz4306t-54" edge="1" parent="1" source="9c0FLtZcMj3uGaz4306t-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="9c0FLtZcMj3uGaz4306t-48">
           <mxGeometry relative="1" as="geometry" />
