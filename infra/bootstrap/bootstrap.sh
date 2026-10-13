@@ -14,6 +14,7 @@ export PROJECT_ID=${SOLUTION}-${GCP_ENVIRONMENT}
 export IMAGE=${GCP_DOCKER_REPO}/${PROJECT_ID}/${GCP_ARTIFACT_REGISTRY}/airflow-dbt:${TAG}
 
 gcloud auth login
+gcloud auth application-default login
 gcloud config set project ${PROJECT_INIT}
 
 # Create projects
@@ -56,7 +57,7 @@ gcloud storage ls
 ### TERRAFORM BOOTSTRAP ###
 gcloud auth application-default login
 
-### Zbudowanie obrasu Airflow
+### Zbudowanie obrazu Airflow
 
 # Inicjalna budowa obrazu dokerowego dla Airflow i umieszczenie w repozytorium
 
@@ -72,6 +73,34 @@ docker push $IMAGE
 #terraform apply -var-file="../${PROJECT_DEV}.tfvars"
 #cd ..
 
+# Infra preparation
+terraform plan -var-file=${PROJECT_DEV}.tfvars \
+  -target=module.airflow.google_container_cluster.airflow \
+  -target=module.airflow.google_sql_database.airflow \
+  -target=module.airflow.google_sql_user.airflow \
+  -target=module.airflow.google_service_account.airflow_gsa \
+  -target=module.airflow.google_project_iam_member.airflow_roles \
+  -target=module.airflow.google_service_account_iam_member.cloud_sql_proxy_workload_identity
+
+terraform apply -var-file=${PROJECT_DEV}.tfvars \
+  -target=module.airflow.google_container_cluster.airflow \
+  -target=module.airflow.google_sql_database.airflow \
+  -target=module.airflow.google_sql_user.airflow \
+  -target=module.airflow.google_service_account.airflow_gsa \
+  -target=module.airflow.google_project_iam_member.airflow_roles \
+  -target=module.airflow.google_service_account_iam_member.cloud_sql_proxy_workload_identity
+
+# SQL proxy pod
+gcloud container clusters get-credentials airflow-dev \
+  --region={$REGION} \
+  --project=${PROJECT_DEV}
+
+kubectl create namespace airflow --dry-run=client -o yaml | kubectl apply -f -
+
+kubectl apply -f ../../../platform/helm/airflow/cloud-sql-proxy.yaml
+kubectl -n airflow rollout status deployment/cloud-sql-proxy --timeout=180s
+
+# Apache Airflow
 terraform init
 terraform plan  -var-file="${PROJECT_DEV}.tfvars"
 terraform apply -var-file="${PROJECT_DEV}.tfvars"
