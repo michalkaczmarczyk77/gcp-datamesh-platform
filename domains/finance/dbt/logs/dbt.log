@@ -306,3 +306,31 @@
 [0m14:12:57.604190 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ed886b5f680>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ed886c088d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ed886fde950>]}
 [0m14:12:57.604697 [debug] [MainThread]: Flushing usage events
 [0m14:12:58.402698 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m17:17:34.869927 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x788a66171be0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x788a67f38cd0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x788a647ff890>]}
+
+
+============================== 17:17:34.882470 | 76133480-c738-4ac7-8287-c5ff38d046f9 ==============================
+[0m17:17:34.882470 [info ] [MainThread]: Running with dbt=1.12.5
+[0m17:17:34.883932 [debug] [MainThread]: running dbt with arguments {'partial_parse': 'True', 'fail_fast': 'False', 'maximum_seed_size_mib': '1', 'send_anonymous_usage_stats': 'True', 'hints_enabled': 'True', 'log_cache_events': 'False', 'use_colors': 'True', 'printer_width': '80', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'cache_selected_only': 'False', 'write_json': 'True', 'quiet': 'False', 'empty': 'None', 'profiles_dir': '/workspace/.dbt', 'use_experimental_parser': 'False', 'debug': 'False', 'indirect_selection': 'eager', 'warn_error': 'None', 'log_format': 'default', 'introspect': 'True', 'target_path': 'None', 'invocation_command': 'dbt ', 'no_print': 'None', 'static_parser': 'True', 'version_check': 'True', 'log_path': '/workspace/domains/finance/dbt/logs'}
+[0m17:17:35.086181 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '76133480-c738-4ac7-8287-c5ff38d046f9', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x788a64a2afd0>]}
+[0m17:17:35.105759 [info ] [MainThread]: Warning: No packages were found in packages.yml
+[0m17:17:35.107249 [info ] [MainThread]: Warning: No packages were found in packages.yml
+[0m17:17:35.108886 [debug] [MainThread]: Resource report: {"command_name": "deps", "command_success": true, "command_wall_clock_time": 0.43641973, "process_in_blocks": "1712", "process_kernel_time": 0.143833, "process_mem_max_rss": "121240", "process_out_blocks": "16", "process_user_time": 2.198447}
+[0m17:17:35.109631 [debug] [MainThread]: Command `cli deps` succeeded at 17:17:35.109477 after 0.44 seconds
+[0m17:17:35.110157 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x788a6479f680>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x788a646488d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x788a64a2ed50>]}
+[0m17:17:35.110576 [debug] [MainThread]: Flushing usage events
+[0m17:17:35.923270 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m17:20:30.217486 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x743e912b9be0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x743e93158cd0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x743e8fa6f890>]}
+
+
+============================== 17:20:30.223651 | 53749b84-b1d4-4618-af30-292f8c20a97f ==============================
+[0m17:20:30.223651 [info ] [MainThread]: Running with dbt=1.12.5
+[0m17:20:30.224843 [debug] [MainThread]: running dbt with arguments {'empty': 'None', 'introspect': 'True', 'hints_enabled': 'True', 'log_format': 'default', 'partial_parse': 'True', 'fail_fast': 'False', 'send_anonymous_usage_stats': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'write_json': 'True', 'quiet': 'False', 'profiles_dir': '/workspace/.dbt', 'use_experimental_parser': 'False', 'maximum_seed_size_mib': '1', 'warn_error': 'None', 'use_colors': 'True', 'static_parser': 'True', 'version_check': 'True', 'target_path': 'None', 'invocation_command': 'dbt ', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'debug': 'False', 'no_print': 'None', 'cache_selected_only': 'False', 'log_path': '/workspace/domains/finance/dbt/logs', 'printer_width': '80'}
+[0m17:20:30.419613 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '53749b84-b1d4-4618-af30-292f8c20a97f', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x743e8fc92fd0>]}
+[0m17:20:30.436134 [info ] [MainThread]: Warning: No packages were found in packages.yml
+[0m17:20:30.437195 [info ] [MainThread]: Warning: No packages were found in packages.yml
+[0m17:20:30.438382 [debug] [MainThread]: Resource report: {"command_name": "deps", "command_success": true, "command_wall_clock_time": 0.40769443, "process_in_blocks": "0", "process_kernel_time": 0.111983, "process_mem_max_rss": "121292", "process_out_blocks": "16", "process_user_time": 2.038706}
+[0m17:20:30.438937 [debug] [MainThread]: Command `cli deps` succeeded at 17:20:30.438828 after 0.41 seconds
+[0m17:20:30.439308 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x743e8fa13680>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x743e8f8c08d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x743e8fc96d50>]}
+[0m17:20:30.439678 [debug] [MainThread]: Flushing usage events
+[0m17:20:31.182465 [debug] [MainThread]: An error was encountered while trying to flush usage events

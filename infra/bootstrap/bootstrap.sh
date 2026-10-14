@@ -73,7 +73,7 @@ docker push $IMAGE
 #terraform apply -var-file="../${PROJECT_DEV}.tfvars"
 #cd ..
 
-# Infra preparation
+# prerequisites: Create the cluster, database, and proxy identity. Not the Airflow Helm release yet.
 terraform plan -var-file=${PROJECT_DEV}.tfvars \
   -target=module.airflow.google_container_cluster.airflow \
   -target=module.airflow.google_sql_database.airflow \
@@ -90,7 +90,7 @@ terraform apply -var-file=${PROJECT_DEV}.tfvars \
   -target=module.airflow.google_project_iam_member.airflow_roles \
   -target=module.airflow.google_service_account_iam_member.cloud_sql_proxy_workload_identity
 
-# SQL proxy pod
+# SQL proxy pod 
 gcloud container clusters get-credentials airflow-dev \
   --region={$REGION} \
   --project=${PROJECT_DEV}
