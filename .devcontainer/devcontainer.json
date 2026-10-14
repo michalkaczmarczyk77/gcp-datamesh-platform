@@ -1,9 +1,12 @@
 {
   "name": "gcp-datamesh-platform-devcontainer",
   "build": {
-    "dockerfile": "Dockerfile",
+    "dockerfile": "Dockerfile-DinD",
     "context": "."
   },
+// Adding "--privileged" here runs the container with privileged mode enabled, 
+// which is necessary for Docker-in-Docker or other privileged operations inside the container.
+  "runArgs": ["--privileged"],
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
   "workspaceFolder": "/workspace",
 //  "mounts": [
