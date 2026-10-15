@@ -4,6 +4,7 @@
     "dockerfile": "Dockerfile-DinD",
     "context": "."
   },
+//"overrideCommand": false,
 // Adding "--privileged" here runs the container with privileged mode enabled, 
 // which is necessary for Docker-in-Docker or other privileged operations inside the container.
   "runArgs": ["--privileged"],
@@ -42,5 +43,6 @@
       } 
     }
   }
-  ,"postCreateCommand": "echo 'alias ll=\"ls -alF\"' >> ~/.bashrc"
+  //,"postCreateCommand": "echo 'alias ll=\"ls -alF\"' >> ~/.bashrc && /workspace/.devcontainer/docker-dind-entrypoint.sh"
+  ,"postCreateCommand": "echo 'alias ll=\"ls -alF\"' >> ~/.bashrc && /usr/local/bin/docker-dind-entrypoint.sh"
 }
