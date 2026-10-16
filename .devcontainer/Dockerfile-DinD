@@ -27,6 +27,9 @@ RUN apt-get update && \
       procps && \
     rm -rf /var/lib/apt/lists/*
 
+#########################
+## DOCKER INSTALLATION ##
+#########################
 # Add Docker's official GPG key
 RUN install -m 0755 -d /etc/apt/keyrings
 RUN mkdir -p /etc/apt/keyrings && \
@@ -51,17 +54,21 @@ RUN mkdir -p /var/run/docker
 #VOLUME /var/lib/docker
 
 # Copy entrypoint script to start Docker daemon
+# Use the entrypoint script to start Docker daemon and keep container running
 COPY docker-dind-entrypoint.sh /usr/local/bin/docker-dind-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-dind-entrypoint.sh
-
-# Use the entrypoint script to start Docker daemon and keep container running
 
 # Expose Docker daemon port (optional)
 #EXPOSE 2375
 
+######################
+## DBT INSTALLATION ##
+######################
+
 # Install DBT python libraries
 RUN python -m pip install --no-input --break-system-packages --upgrade pip setuptools && \
     python -m pip install --no-input --break-system-packages dbt-core dbt-bigquery google-cloud-pubsub
+
 
 RUN mkdir -p /usr/share/keyrings && \
     curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | \
