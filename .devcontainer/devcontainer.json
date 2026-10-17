@@ -53,6 +53,5 @@
       } 
     }
   }
-  //,"postCreateCommand": "echo 'alias ll=\"ls -alF\"' >> ~/.bashrc && /usr/local/bin/install-microk8s.sh"
   ,"postCreateCommand": "echo 'alias ll=\"ls -alF\"' >> ~/.bashrc"
 }
