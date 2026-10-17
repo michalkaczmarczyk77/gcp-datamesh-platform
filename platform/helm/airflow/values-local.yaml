@@ -1,0 +1,20 @@
+createUserJob:
+  useHelmHooks: false
+  applyCustomEnv: false
+
+migrateDatabaseJob:
+  useHelmHooks: false
+  applyCustomEnv: false
+
+executor: KubernetesExecutor
+
+triggerer:
+  enabled: false
+
+postgresql:
+  enabled: true
+  persistence:
+    enabled: false
+
+statsd:
+  enabled: false
