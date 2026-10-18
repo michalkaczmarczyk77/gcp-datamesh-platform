@@ -1,26 +1,52 @@
 # Local Airflow installation
 
-The devcontainer installs and runs MicroK8s using snapd. Open the project in the
-devcontainer on a Linux Docker host; it must run privileged with access to the
-host cgroup filesystem and AppArmor. Verify AppArmor is enabled and securityfs
-is mounted on the host before creating the devcontainer:
+This Terraform stack installs the Apache Airflow Helm chart and a separate
+PostgreSQL pod into the `airflow` namespace of an existing local Kubernetes
+cluster. It does not create a cluster or use GCP resources.
+
+## Prerequisites
+
+- Terraform 1.9 or later
+- Helm provider access to the Apache Airflow chart repository
+- A reachable Kubernetes cluster and a kubeconfig available through
+  `KUBECONFIG` or `~/.kube/config`
+
+The Kubernetes cluster runs outside the devcontainer at `192.168.0.102`. The
+local Terraform providers default to the host file
+`~/.kube/config-microk8s-container.yaml`, which the devcontainer bind-mounts as
+`/root/.kube/config-microk8s-container.yaml`. The kubeconfig `server` entry
+must use an address and port reachable from wherever Terraform is running,
+not `127.0.0.1` or `localhost`. For MicroK8s, the API server normally listens
+on port `16443`.
+
+If the kubeconfig still points to localhost, update its cluster endpoint on
+the host before running Terraform. This preserves the existing credentials
+and certificate data:
 
 ```bash
-sudo aa-status
-test -r /sys/kernel/security/apparmor/profiles
+KUBECONFIG="$HOME/.kube/config-microk8s-container.yaml"
+CLUSTER="$(kubectl config view --kubeconfig="$KUBECONFIG" \
+  -o jsonpath='{.clusters[0].name}')"
+kubectl config set-cluster "$CLUSTER" \
+  --server=https://192.168.0.102:16443 \
+  --kubeconfig="$KUBECONFIG"
 ```
 
-If the second command fails, mount securityfs on the host with
-`sudo mount -t securityfs securityfs /sys/kernel/security`, then recreate the
-devcontainer. The devcontainer bind-mounts this host interface for snapd.
-Rebuild and reopen the devcontainer after changing its image. On first
-creation, post-create setup installs MicroK8s, waits for the
-cluster to become ready, and writes `/root/.kube/microk8s-config`. Check it with
-`microk8s kubectl get nodes`.
+Use the cluster's actual API port if it is not MicroK8s. The API server must
+allow connections from the machine running Terraform, and its TLS certificate
+must be valid for `192.168.0.102`; do not disable certificate verification.
+Check connectivity from the same environment where you will run Terraform:
 
-Install Airflow into that cluster with this Terraform stack. It installs the
-`apache-airflow/airflow` chart and uses its bundled PostgreSQL with
-non-persistent storage; no GCP resources or credentials are required.
+```bash
+kubectl get nodes
+```
+
+If the cluster uses a different kubeconfig file or context, set
+`kubeconfig_path` and/or `kube_context` as shown below.
+
+## Install
+
+From the repository root:
 
 ```bash
 cd infra/local
@@ -28,8 +54,12 @@ terraform init
 terraform apply
 ```
 
-The Helm provider uses the generated MicroK8s kubeconfig by default. Override
-the path or context if needed:
+Terraform prompts for `postgres_password`; use a value of at least 16
+characters. It is marked sensitive in Terraform output, but is stored in the
+local Terraform state and Kubernetes Secret. Keep the state file private and
+do not commit it.
+
+To select a kubeconfig explicitly:
 
 ```bash
 terraform apply \
@@ -37,38 +67,20 @@ terraform apply \
   -var='kube_context=my-local-context'
 ```
 
-The local chart values disable Helm hooks for the user-creation and database
-migration jobs to keep Terraform installation from hanging. This release is
-independent of the GKE dev/prod stacks and can be removed with
-`terraform destroy` from `infra/local`. Recreating the devcontainer also
-recreates its local MicroK8s cluster.
+The PostgreSQL service is available inside the cluster at
+`airflow-postgresql.airflow.svc.cluster.local:5432`. The PostgreSQL container
+uses an `emptyDir` volume, so its data is lost if the pod is recreated. This
+keeps the local setup independent of a cluster storage provisioner; use a
+persistent volume for any data that must survive pod replacement.
 
-Running MicroK8s this way requires a Linux host with working nested
-containerization and kernel support for Kubernetes networking and filesystem
-modules. Docker Desktop on macOS/Windows may not support this nested-cluster
-setup.
+Check the installation with:
 
-# Post installation steps
-To try it: on a Linux Docker host, rebuild and reopen the devcontainer. When setup finishes, check the cluster with microk8s kubectl get nodes, then run terraform init and terraform apply from infra/local.
+```bash
+kubectl -n airflow get deployments,pods,services
+```
 
-
-# Another solution - because microk8s inside docker was a bad idea.
-Yes—that’s a sensible setup, and it’s what I’d recommend over installing MicroK8s inside the dev container:
-
-MicroK8s runs on your host, where it can use the host’s kernel and system services normally.
-Your dev container has kubectl and the project tools.
-kubectl in the container connects to the host’s Kubernetes API.
-The main details to solve are network reachability and credentials:
-
-The kubeconfig generated by microk8s config may point to 127.0.0.1:16443. From inside the container, 127.0.0.1 means the container itself, not your host. The API endpoint must use a host address reachable from the container.
-The host’s firewall and MicroK8s API server must allow that connection. Don’t expose the API publicly.
-The kubeconfig often contains powerful credentials. Keep it out of the image and source control; provide it to the container securely, ideally with limited permissions.
-On Linux with Docker, host.docker.internal may need to be added as a host-gateway entry; Docker Desktop typically provides it. Your devcontainer config already sets KUBECONFIG to /root/.kube/microk8s-config, so that path could be used for the host-generated config, provided it’s made available securely and its API address works from the container.
-
-Once configured, the practical test from the dev container is:
-
-ip -br addr     # addresses on container interfaces
-ip route        # routing table; look for the default gateway
-
-
-getent hosts host.docker.internal
+The local chart values disable the chart's bundled PostgreSQL and configure
+Airflow to use the separately managed database. Airflow's user-creation and
+database-migration hooks are disabled to avoid Terraform installation hanging.
+The release is independent of the GKE dev/prod stacks and can be removed with
+`terraform destroy` from `infra/local`.

@@ -12,9 +12,15 @@ triggerer:
   enabled: false
 
 postgresql:
-  enabled: true
-  persistence:
-    enabled: false
+  enabled: false
+
+data:
+  metadataConnection:
+    protocol: postgresql
+    host: airflow-postgresql.airflow.svc.cluster.local
+    port: 5432
+    user: airflow
+    db: airflow
 
 statsd:
   enabled: false
