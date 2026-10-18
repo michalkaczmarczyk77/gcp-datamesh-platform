@@ -17,7 +17,7 @@ postgresql:
 data:
   metadataConnection:
     protocol: postgresql
-    host: airflow-postgresql.airflow.svc.cluster.local
+    host: airflow-postgresql.db-services.svc.cluster.local
     port: 5432
     user: airflow
     db: airflow

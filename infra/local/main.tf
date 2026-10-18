@@ -12,10 +12,5 @@ resource "helm_release" "airflow" {
     value = var.postgres_password
   }
 
-  depends_on = [
-    kubernetes_deployment_v1.postgresql,
-    kubernetes_service_v1.postgresql,
-  ]
-
   timeout = 600
 }

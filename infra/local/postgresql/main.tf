@@ -1,26 +1,7 @@
-resource "kubernetes_namespace_v1" "airflow" {
-  metadata {
-    name = "airflow2"
-  }
-}
-
-resource "kubernetes_secret_v1" "postgresql" {
-  metadata {
-    name      = "airflow-postgresql"
-    namespace = kubernetes_namespace_v1.airflow.metadata[0].name
-  }
-
-  data = {
-    POSTGRES_PASSWORD = var.postgres_password
-  }
-
-  type = "Opaque"
-}
-
 resource "kubernetes_deployment_v1" "postgresql" {
   metadata {
     name      = "airflow-postgresql"
-    namespace = kubernetes_namespace_v1.airflow.metadata[0].name
+    namespace = kubernetes_namespace_v1.postgresql.metadata[0].name
     labels = {
       app = "airflow-postgresql"
     }
@@ -137,7 +118,7 @@ resource "kubernetes_deployment_v1" "postgresql" {
 resource "kubernetes_service_v1" "postgresql" {
   metadata {
     name      = "airflow-postgresql"
-    namespace = kubernetes_namespace_v1.airflow.metadata[0].name
+    namespace = kubernetes_namespace_v1.postgresql.metadata[0].name
   }
 
   spec {

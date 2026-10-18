@@ -1,8 +1,9 @@
-# Local Airflow installation
+# Local Airflow and PostgreSQL
 
-This Terraform stack installs the Apache Airflow Helm chart and a separate
-PostgreSQL pod into the `airflow` namespace of an existing local Kubernetes
-cluster. It does not create a cluster or use GCP resources.
+These Terraform stacks install Apache Airflow and its PostgreSQL database into
+separate namespaces of an existing local Kubernetes cluster. The Airflow stack
+is in `infra/local`; the PostgreSQL-only stack is in `infra/local/postgresql`.
+Neither stack creates a cluster or uses GCP resources.
 
 ## Prerequisites
 
@@ -46,41 +47,107 @@ If the cluster uses a different kubeconfig file or context, set
 
 ## Install
 
-From the repository root:
+Apply PostgreSQL first, then Airflow, from the repository root:
 
 ```bash
-cd infra/local
-terraform init
-terraform apply
+terraform -chdir=infra/local/postgresql init
+terraform -chdir=infra/local/postgresql apply
+terraform -chdir=infra/local init
+terraform -chdir=infra/local apply
 ```
 
-Terraform prompts for `postgres_password`; use a value of at least 16
-characters. It is marked sensitive in Terraform output, but is stored in the
-local Terraform state and Kubernetes Secret. Keep the state file private and
-do not commit it.
+Both stacks prompt for the same `postgres_password`: at least 6 characters,
+using only letters, digits, and `#$%_`, with at least one uppercase letter,
+lowercase letter, digit, and allowed symbol. It is marked sensitive in
+Terraform output, but is stored in local Terraform state and the Kubernetes
+Secret. Keep both state files private and do not commit them.
 
 To select a kubeconfig explicitly:
 
 ```bash
-terraform apply \
+terraform -chdir=infra/local/postgresql apply \
+  -var='kubeconfig_path=/path/to/config' \
+  -var='kube_context=my-local-context'
+terraform -chdir=infra/local apply \
   -var='kubeconfig_path=/path/to/config' \
   -var='kube_context=my-local-context'
 ```
 
+If the previous `infra/local` Terraform state already manages PostgreSQL,
+move those resources into the new PostgreSQL state before applying either
+stack. Follow the existing-state migration steps in
+[the PostgreSQL stack README](./postgresql/README.md).
+
 The PostgreSQL service is available inside the cluster at
-`airflow-postgresql.airflow.svc.cluster.local:5432`. The PostgreSQL container
-uses an `emptyDir` volume, so its data is lost if the pod is recreated. This
-keeps the local setup independent of a cluster storage provisioner; use a
-persistent volume for any data that must survive pod replacement.
+`airflow-postgresql.db-services.svc.cluster.local:5432`. The PostgreSQL
+container uses an `emptyDir` volume, so its data is lost if the pod is
+recreated. This keeps the local setup independent of a cluster storage
+provisioner; use a persistent volume for any data that must survive pod
+replacement.
 
 Check the installation with:
 
 ```bash
-kubectl -n airflow get deployments,pods,services
+kubectl -n db-services get deployments,pods,services
+kubectl -n airflow get pods
 ```
+
+## Open the Airflow UI from the host
+
+The chart exposes Airflow through an internal `ClusterIP` service named
+`airflow-api-server` on port `8080`. This is intentional: a `ClusterIP` is not
+directly reachable from the host, but `kubectl port-forward` provides a local
+connection without exposing the UI to the network.
+
+Run this from a terminal on the host machine, using the kubeconfig and context
+that can reach the local cluster:
+
+```bash
+kubectl --kubeconfig="$HOME/.kube/config-microk8s-container.yaml" \
+  -n airflow port-forward svc/airflow-api-server 8080:8080
+```
+
+Keep the command running and open <http://localhost:8080> in a browser. Stop
+the port-forward with `Ctrl+C`. If `kubectl` already uses the correct
+kubeconfig and context, omit `--kubeconfig=...`.
+
+If you run the command inside the devcontainer instead, the forwarded
+`localhost` port belongs to the container; use VS Code's forwarded-ports
+control to open port `8080` on the host, or run `kubectl port-forward` directly
+from the host as above. No Terraform or Helm service change is needed for
+host-only access. Avoid changing the service to `NodePort` or `LoadBalancer`
+unless you specifically need network-wide access and have secured that access.
 
 The local chart values disable the chart's bundled PostgreSQL and configure
 Airflow to use the separately managed database. Airflow's user-creation and
 database-migration hooks are disabled to avoid Terraform installation hanging.
-The release is independent of the GKE dev/prod stacks and can be removed with
-`terraform destroy` from `infra/local`.
+The stacks are independent of the GKE dev/prod stacks. Destroy Airflow from
+`infra/local` before destroying PostgreSQL from `infra/local/postgresql`.
+
+# Run Airflow WebUi
+
+Forward ports and expose it outside cluster
+
+```bash
+nohup kubectl --kubeconfig="$HOME/.kube/config-microk8s-container.yaml" \
+  -n airflow port-forward svc/airflow-api-server 8080:8080 \
+  > "$HOME/airflow-port-forward.log" 2>&1 < /dev/null &
+echo $! > "$HOME/airflow-port-forward.pid"
+
+```
+
+- Open http://localhost:8080. 
+- Login as default admin/admin
+
+To check the log:
+
+```bash
+tail -f "$HOME/airflow-port-forward.log"
+```
+
+To stop it, terminate the saved process:
+
+```bash
+kill "$(cat "$HOME/airflow-port-forward.pid")"
+rm "$HOME/airflow-port-forward.pid"
+```
