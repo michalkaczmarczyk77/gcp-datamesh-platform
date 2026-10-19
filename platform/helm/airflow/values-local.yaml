@@ -1,0 +1,51 @@
+createUserJob:
+  useHelmHooks: false
+  applyCustomEnv: false
+
+migrateDatabaseJob:
+  useHelmHooks: false
+  applyCustomEnv: false
+
+executor: KubernetesExecutor
+
+triggerer:
+  enabled: false
+
+postgresql:
+  enabled: false
+
+statsd:
+  enabled: false
+
+apiServer:
+  replicas: 1q
+  resources: { requests: { cpu: "500m", memory: "1Gi" } }
+  service:
+    type: NodePort
+    ports:
+      - name: api-server
+        port: "{{ .Values.ports.apiServer }}"
+        nodePort: 30080
+
+scheduler:
+  replicas: 1
+  resources: { requests: { cpu: "500m", memory: "1Gi" } }
+
+workers:
+  resources: { requests: { cpu: "500m", memory: "1Gi" } }
+
+dags:
+  gitSync:
+    enabled: true
+    repo: https://github.com/michalkaczmarczyk77/gcp-datamesh-platform
+    branch: main
+    subPath: "domains"
+
+data:
+  metadataConnection:
+    protocol: postgresql
+    host: airflow-postgresql.db-services.svc.cluster.local
+    port: 5432
+    user: airflow
+    db: airflow
+

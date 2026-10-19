@@ -1,22 +1,32 @@
 {
   "name": "gcp-datamesh-platform-devcontainer",
   "build": {
-    "dockerfile": "Dockerfile-DinD",
+    "dockerfile": "Dockerfile",
     "context": "."
   },
-//"overrideCommand": false,
-// Adding "--privileged" here runs the container with privileged mode enabled, 
-// which is necessary for Docker-in-Docker or other privileged operations inside the container.
-  "runArgs": ["--privileged"],
+  "overrideCommand": false,
+  "runArgs": [
+    "--privileged",
+    "--cgroupns=host",
+    "--tmpfs=/run",
+    "--tmpfs=/run/lock",
+    "--mount=type=bind,source=/sys/fs/cgroup,target=/sys/fs/cgroup",
+    "--mount=type=bind,source=/sys/kernel/security,target=/sys/kernel/security",
+    "--add-host=host.docker.internal:host-gateway"
+  ],
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
   "workspaceFolder": "/workspace",
-//  "mounts": [
-//    "source=${localWorkspaceFolder},target=/workspace/dbt,type=bind,consistency=cached"
-//  ],
+// to save VSCode user data and in particular copilot session
+  "mounts": [
+    "source=gcp-datamesh-vscode-user-data,target=/root/.vscode-server/data/User,type=volume",
+    "source=gcp-datamesh-bash-history,target=/root/.bash_history,type=volume",
+    "source=${localEnv:HOME}/.kube/config-microk8s-container.yaml,target=/root/.kube/config-microk8s-container.yaml,type=bind"
+  ],
   "containerEnv": {
     "DBT_PROFILES_DIR": "/workspace/.dbt",
     "GOOGLE_APPLICATION_CREDENTIALS": "/root/.keys/gcloud/lmpl-data-dev-e35-7cec2ad5559f.json",
-    "GCP_PROJECT_ID": "lmpl-data-dev-e35" 
+    "GCP_PROJECT_ID": "lmpl-data-dev-e35",
+    "KUBECONFIG": "/root/.kube/config-microk8s-container.yaml"
   }
 //  ,"remoteEnv": { 
 //    "DBT_PROFILES_DIR": "/workspace/dbt/.dbt",
@@ -43,6 +53,5 @@
       } 
     }
   }
-  //,"postCreateCommand": "echo 'alias ll=\"ls -alF\"' >> ~/.bashrc && /workspace/.devcontainer/docker-dind-entrypoint.sh"
-  ,"postCreateCommand": "echo 'alias ll=\"ls -alF\"' >> ~/.bashrc && /usr/local/bin/docker-dind-entrypoint.sh"
+  ,"postCreateCommand": "echo 'alias ll=\"ls -alF\"' >> ~/.bashrc"
 }
