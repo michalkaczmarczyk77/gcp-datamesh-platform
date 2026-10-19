@@ -1,0 +1,14 @@
+[Unit]
+Description=Forward local Airflow API server to localhost:8080
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+ExecStart=/bin/sh -c 'exec kubectl --kubeconfig=%h/.kube/config-microk8s-container.yaml -n airflow port-forward --address=127.0.0.1 svc/airflow-api-server 8080:8080'
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

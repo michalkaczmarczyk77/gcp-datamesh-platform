@@ -14,6 +14,33 @@ triggerer:
 postgresql:
   enabled: false
 
+statsd:
+  enabled: false
+
+apiServer:
+  replicas: 1q
+  resources: { requests: { cpu: "500m", memory: "1Gi" } }
+  service:
+    type: NodePort
+    ports:
+      - name: api-server
+        port: "{{ .Values.ports.apiServer }}"
+        nodePort: 30080
+
+scheduler:
+  replicas: 1
+  resources: { requests: { cpu: "500m", memory: "1Gi" } }
+
+workers:
+  resources: { requests: { cpu: "500m", memory: "1Gi" } }
+
+dags:
+  gitSync:
+    enabled: true
+    repo: https://github.com/michalkaczmarczyk77/gcp-datamesh-platform
+    branch: main
+    subPath: "domains"
+
 data:
   metadataConnection:
     protocol: postgresql
@@ -22,5 +49,3 @@ data:
     user: airflow
     db: airflow
 
-statsd:
-  enabled: false

@@ -94,60 +94,53 @@ kubectl -n airflow get pods
 
 ## Open the Airflow UI from the host
 
-The chart exposes Airflow through an internal `ClusterIP` service named
-`airflow-api-server` on port `8080`. This is intentional: a `ClusterIP` is not
-directly reachable from the host, but `kubectl port-forward` provides a local
-connection without exposing the UI to the network.
-
-Run this from a terminal on the host machine, using the kubeconfig and context
-that can reach the local cluster:
+The API server remains an internal `ClusterIP` service. To make
+`http://localhost:8080` available automatically on a Linux host, install the
+provided user-level systemd service. First make sure the host kubeconfig at
+`~/.kube/config-microk8s-container.yaml` can access the cluster and `kubectl`
+is available on the standard executable search path. If you previously applied
+a NodePort configuration, apply the local Terraform stack again to restore the
+internal service type (use the same variables as for the original apply):
 
 ```bash
-kubectl --kubeconfig="$HOME/.kube/config-microk8s-container.yaml" \
-  -n airflow port-forward svc/airflow-api-server 8080:8080
+terraform -chdir=infra/local apply
 ```
 
-Keep the command running and open <http://localhost:8080> in a browser. Stop
-the port-forward with `Ctrl+C`. If `kubectl` already uses the correct
-kubeconfig and context, omit `--kubeconfig=...`.
+```bash
+mkdir -p ~/.config/systemd/user
+cp infra/local/airflow-port-forward.service \
+  ~/.config/systemd/user/airflow-port-forward.service
+systemctl --user daemon-reload
+systemctl --user enable --now airflow-port-forward.service
+```
 
-If you run the command inside the devcontainer instead, the forwarded
-`localhost` port belongs to the container; use VS Code's forwarded-ports
-control to open port `8080` on the host, or run `kubectl port-forward` directly
-from the host as above. No Terraform or Helm service change is needed for
-host-only access. Avoid changing the service to `NodePort` or `LoadBalancer`
-unless you specifically need network-wide access and have secured that access.
+The unit binds only to the host's loopback interface. Open
+<http://localhost:8080> after starting it. The service retries if the cluster
+or Airflow is temporarily unavailable.
+
+Check status and logs with:
+
+```bash
+systemctl --user status airflow-port-forward.service
+journalctl --user -u airflow-port-forward.service -f
+```
+
+The service starts when your user session starts. To also start it at boot
+before you log in, enable lingering for your user (may require administrator
+permission):
+
+```bash
+loginctl enable-linger "$USER"
+```
+
+To stop and disable automatic forwarding:
+
+```bash
+systemctl --user disable --now airflow-port-forward.service
+```
 
 The local chart values disable the chart's bundled PostgreSQL and configure
 Airflow to use the separately managed database. Airflow's user-creation and
 database-migration hooks are disabled to avoid Terraform installation hanging.
 The stacks are independent of the GKE dev/prod stacks. Destroy Airflow from
 `infra/local` before destroying PostgreSQL from `infra/local/postgresql`.
-
-# Run Airflow WebUi
-
-Forward ports and expose it outside cluster
-
-```bash
-nohup kubectl --kubeconfig="$HOME/.kube/config-microk8s-container.yaml" \
-  -n airflow port-forward svc/airflow-api-server 8080:8080 \
-  > "$HOME/airflow-port-forward.log" 2>&1 < /dev/null &
-echo $! > "$HOME/airflow-port-forward.pid"
-
-```
-
-- Open http://localhost:8080. 
-- Login as default admin/admin
-
-To check the log:
-
-```bash
-tail -f "$HOME/airflow-port-forward.log"
-```
-
-To stop it, terminate the saved process:
-
-```bash
-kill "$(cat "$HOME/airflow-port-forward.pid")"
-rm "$HOME/airflow-port-forward.pid"
-```

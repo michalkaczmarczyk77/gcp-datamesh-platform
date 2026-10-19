@@ -53,3 +53,12 @@ be `db-services` for this state move to preserve it; if it has a different
 name, reconcile the namespace before applying to avoid replacing it. The
 Airflow stack now manages a separate `airflow` namespace and connects to the
 PostgreSQL Service in `db-services`.
+
+# Enabling connection from outside of cluster
+
+```bash
+nohup kubectl --kubeconfig="$HOME/.kube/config-microk8s-container.yaml" \
+  -n airflow port-forward svc/airflow-api-server 8080:8080 \
+  > "$HOME/airflow-port-forward.log" 2>&1 < /dev/null &
+echo $! > "$HOME/airflow-port-forward.pid"
+```
