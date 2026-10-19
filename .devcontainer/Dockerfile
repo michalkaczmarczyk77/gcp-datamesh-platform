@@ -3,11 +3,13 @@ FROM python:3.14-slim
 WORKDIR /workspace
 
 ENV DEBIAN_FRONTEND=noninteractive
-ENV PATH="/usr/lib/google-cloud-sdk/bin:${PATH}"
+ENV PATH="/usr/lib/google-cloud-sdk/bin:/snap/bin:${PATH}"
+ENV container=docker
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
       bash \
+      apparmor \
       ca-certificates \
       curl \
       git \
@@ -18,20 +20,59 @@ RUN apt-get update && \
       musl-dev \
       openssl \
       unzip \
-      zstd && \
+      zstd \
+      lsb-release \
+      iptables \
+      iproute2 \
+      libseccomp2 \
+      iputils-ping \
+      procps \
+      snapd \
+      squashfs-tools \
+      systemd \
+      systemd-sysv && \
     rm -rf /var/lib/apt/lists/*
 
-RUN install -m 0755 -d /etc/apt/keyrings && \
+#########################
+## DOCKER INSTALLATION ##
+#########################
+# Add Docker's official GPG key
+RUN install -m 0755 -d /etc/apt/keyrings
+RUN mkdir -p /etc/apt/keyrings && \
     curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg && \
-    chmod a+r /etc/apt/keyrings/docker.gpg && \
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(. /etc/os-release && echo $VERSION_CODENAME) stable" > /etc/apt/sources.list.d/docker.list && \
-    apt-get update && \
-    apt-get install -y --no-install-recommends docker-ce docker-ce-cli docker-buildx-plugin docker-compose-plugin containerd.io && \
+    chmod a+r /etc/apt/keyrings/docker.gpg
+
+# Set up the Docker repository
+RUN echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(. /etc/os-release && echo $VERSION_CODENAME) stable" > /etc/apt/sources.list.d/docker.list
+#  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
+#  $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# Install Docker daemon and client
+RUN apt-get update && \
+    apt-get install -y docker-ce docker-ce-cli docker-buildx-plugin docker-compose-plugin containerd.io && \
     rm -rf /var/lib/apt/lists/*
 
+# Docker and snapd need systemd as PID 1. MicroK8s is installed after
+# systemd and snapd are running, from the devcontainer post-create command.
+RUN systemctl --root=/ enable docker.service containerd.service snapd.socket
+
+#COPY install-microk8s.sh /usr/local/bin/install-microk8s.sh
+#RUN chmod +x /usr/local/bin/install-microk8s.sh
+
+######################
+## DBT INSTALLATION ##
+######################
+
+# Install DBT python libraries
 RUN python -m pip install --no-input --break-system-packages --upgrade pip setuptools && \
     python -m pip install --no-input --break-system-packages dbt-core dbt-bigquery google-cloud-pubsub
 
+
+##############################
+## CLOUD & INFRA TOOLS ##
+##############################
+# Install Google Cloud SDK and Terraform
 RUN mkdir -p /usr/share/keyrings && \
     curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | \
       gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg && \
@@ -48,6 +89,10 @@ RUN mkdir -p /usr/share/keyrings && \
       terraform && \
     rm -rf /var/lib/apt/lists/*
 
+##############################
+## KUBERNETES TOOLS ##
+##############################
+# Install kubectl for interacting with the cluster
 RUN set -eu; \
     case "$(dpkg --print-architecture)" in \
       amd64) K8S_ARCH=amd64 ;; \
@@ -59,7 +104,15 @@ RUN set -eu; \
     curl -fsSL -o /tmp/kubectl.sha256 "https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/${K8S_ARCH}/kubectl.sha256"; \
     echo "$(cat /tmp/kubectl.sha256)  /tmp/kubectl" | sha256sum --check --status; \
     install -m 0755 /tmp/kubectl /usr/local/bin/kubectl; \
-    rm /tmp/kubectl /tmp/kubectl.sha256; \
+    rm /tmp/kubectl /tmp/kubectl.sha256
+
+# Install Helm for package management
+RUN set -eu; \
+    case "$(dpkg --print-architecture)" in \
+      amd64) K8S_ARCH=amd64 ;; \
+      arm64) K8S_ARCH=arm64 ;; \
+      *) echo "Unsupported architecture: $(dpkg --print-architecture)" >&2; exit 1 ;; \
+    esac; \
     HELM_VERSION="$(curl -fsSL https://api.github.com/repos/helm/helm/releases/latest | grep -oE '"tag_name": *"[^"]+"' | head -n 1 | cut -d '"' -f 4)"; \
     test -n "${HELM_VERSION}"; \
     HELM_URL="https://get.helm.sh/helm-${HELM_VERSION}-linux-${K8S_ARCH}.tar.gz"; \
@@ -68,8 +121,18 @@ RUN set -eu; \
     mkdir /tmp/helm; \
     tar -xzf /tmp/helm.tar.gz -C /tmp/helm; \
     install -m 0755 "/tmp/helm/linux-${K8S_ARCH}/helm" /usr/local/bin/helm; \
-    rm -rf /tmp/helm /tmp/helm.tar.gz; \
+    rm -rf /tmp/helm /tmp/helm.tar.gz
+
+# Install k9s for cluster debugging and monitoring
+RUN set -eu; \
+    case "$(dpkg --print-architecture)" in \
+      amd64) K8S_ARCH=amd64 ;; \
+      arm64) K8S_ARCH=arm64 ;; \
+      *) echo "Unsupported architecture: $(dpkg --print-architecture)" >&2; exit 1 ;; \
+    esac; \
     curl -fsSL "https://github.com/derailed/k9s/releases/latest/download/k9s_Linux_${K8S_ARCH}.tar.gz" | \
       tar -xz -C /usr/local/bin k9s
+  RUN mkdir /root/.kube
 
-CMD ["/bin/bash"]
+STOPSIGNAL SIGRTMIN+3
+CMD ["/sbin/init"]

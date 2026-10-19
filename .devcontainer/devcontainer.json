@@ -1,7 +1,7 @@
 {
   "name": "gcp-datamesh-platform-devcontainer",
   "build": {
-    "dockerfile": "Dockerfile-DinD",
+    "dockerfile": "Dockerfile",
     "context": "."
   },
   "overrideCommand": false,
