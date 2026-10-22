@@ -6,4 +6,4 @@ select
     order_value,
     country
 from {{ source('sales', 'fct_orders') }}
-where status not in ('cancelled', 'returned')
+where status not in ('cancelled', 'returned','fcked')
