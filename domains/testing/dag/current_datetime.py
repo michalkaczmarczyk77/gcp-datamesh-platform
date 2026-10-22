@@ -4,7 +4,7 @@ from pendulum import datetime, now
 
 @dag(
     dag_id="testing_current_datetime",
-    schedule=None,
+    schedule="* * * * *",
     start_date=datetime(2026, 1, 1, tz="UTC"),
     catchup=False,
     tags=["testing"],
