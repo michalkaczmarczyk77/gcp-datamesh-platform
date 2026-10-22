@@ -8,6 +8,18 @@ migrateDatabaseJob:
 
 executor: KubernetesExecutor
 
+env:
+  - name: AIRFLOW__CORE__LOAD_EXAMPLES
+    value: "True"
+
+data:
+  metadataConnection:
+    protocol: postgresql
+    host: airflow-postgresql.db-services.svc.cluster.local
+    port: 5432
+    user: airflow
+    db: airflow
+
 triggerer:
   enabled: false
 
@@ -18,7 +30,7 @@ statsd:
   enabled: false
 
 apiServer:
-  replicas: 1q
+  replicas: 1
   resources: { requests: { cpu: "500m", memory: "1Gi" } }
   service:
     type: NodePort
@@ -26,6 +38,13 @@ apiServer:
       - name: api-server
         port: "{{ .Values.ports.apiServer }}"
         nodePort: 30080
+
+dagProcessor:
+  enabled: true
+  replicas: 1
+  resources:
+    requests: { cpu: "250m", memory: "512Mi" }
+    limits: { cpu: "1", memory: "1Gi" }
 
 scheduler:
   replicas: 1
@@ -35,17 +54,16 @@ workers:
   resources: { requests: { cpu: "500m", memory: "1Gi" } }
 
 dags:
+  persistence:
+    enabled: false # emptyDir is used; no PVC needed
   gitSync:
     enabled: true
     repo: https://github.com/michalkaczmarczyk77/gcp-datamesh-platform
     branch: main
     subPath: "domains"
+    wait: 120               # Polling interval in seconds
+    maxFailures: 0          # Number of sync failures before restarting the pod (0 = infinite retries)
+    #sshKeySecret: "airflow-ssh-secret" # Kubernetes Secret holding 'id_ed25519' or 'id_rsa'
 
-data:
-  metadataConnection:
-    protocol: postgresql
-    host: airflow-postgresql.db-services.svc.cluster.local
-    port: 5432
-    user: airflow
-    db: airflow
-
+#kubectl -n airflow create secret generic airflow-ssh-secret \
+#  --from-file=id_ed25519="$HOME/.ssh/id_ed25519"
