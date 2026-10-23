@@ -1,6 +1,6 @@
 <mxfile host="Electron">
   <diagram name="Page-1" id="xgLNfRt65BB5RLUHj3e0">
-    <mxGraphModel dx="1770" dy="2728" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+    <mxGraphModel dx="2883" dy="3375" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -306,6 +306,42 @@
         </mxCell>
         <mxCell id="8dQldYySo7sRytd0z13s-36" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;fontSize=18;fontStyle=1" value="Governance Layer (data &amp;amp; process) - TBD" vertex="1">
           <mxGeometry height="60" width="970" x="90" y="-897" as="geometry" />
+        </mxCell>
+        <mxCell id="k1qyh8kehVlbWu1hkgJi-2" parent="1" style="swimlane;whiteSpace=wrap;html=1;startSize=23;" value="Airflow Image" vertex="1">
+          <mxGeometry height="260" width="300" x="2120" y="-1470" as="geometry" />
+        </mxCell>
+        <mxCell id="k1qyh8kehVlbWu1hkgJi-3" parent="k1qyh8kehVlbWu1hkgJi-2" style="rounded=0;whiteSpace=wrap;html=1;" value="Astonomer - Cosmos" vertex="1">
+          <mxGeometry height="60" width="120" x="150" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="k1qyh8kehVlbWu1hkgJi-5" parent="k1qyh8kehVlbWu1hkgJi-2" style="rounded=0;whiteSpace=wrap;html=1;" value="Apache Airflow" vertex="1">
+          <mxGeometry height="60" width="120" x="20" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="k1qyh8kehVlbWu1hkgJi-8" parent="k1qyh8kehVlbWu1hkgJi-2" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="KubernetesPodOperator" vertex="1">
+          <mxGeometry height="30" width="170" x="100" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="k1qyh8kehVlbWu1hkgJi-9" parent="k1qyh8kehVlbWu1hkgJi-2" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" value="CeleryExecutor" vertex="1">
+          <mxGeometry height="30" width="170" x="100" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="k1qyh8kehVlbWu1hkgJi-10" parent="k1qyh8kehVlbWu1hkgJi-2" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" value="CeleryKubernetesExecutor" vertex="1">
+          <mxGeometry height="30" width="170" x="100" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="k1qyh8kehVlbWu1hkgJi-4" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="DAG Image" vertex="1">
+          <mxGeometry height="250.12" width="440" x="2510" y="-1490.12" as="geometry" />
+        </mxCell>
+        <mxCell id="k1qyh8kehVlbWu1hkgJi-6" parent="k1qyh8kehVlbWu1hkgJi-4" style="rounded=0;whiteSpace=wrap;html=1;" value="DBT" vertex="1">
+          <mxGeometry height="60" width="120" x="20" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="k1qyh8kehVlbWu1hkgJi-7" parent="k1qyh8kehVlbWu1hkgJi-4" style="rounded=0;whiteSpace=wrap;html=1;" value="/models" vertex="1">
+          <mxGeometry height="60" width="120" x="20" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="k1qyh8kehVlbWu1hkgJi-11" parent="k1qyh8kehVlbWu1hkgJi-4" style="rounded=0;whiteSpace=wrap;html=1;" value="/models/manifest.js" vertex="1">
+          <mxGeometry height="60" width="120" x="150" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="k1qyh8kehVlbWu1hkgJi-15" parent="1" style="shape=note;size=20;whiteSpace=wrap;html=1;" value="Generate and expose manifest before" vertex="1">
+          <mxGeometry height="100" width="100" x="2670" y="-1150.12" as="geometry" />
+        </mxCell>
+        <mxCell id="k1qyh8kehVlbWu1hkgJi-16" edge="1" parent="1" source="k1qyh8kehVlbWu1hkgJi-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;curved=1;curveGeometry=1;" target="k1qyh8kehVlbWu1hkgJi-15">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
