@@ -2,6 +2,7 @@ FROM python:3.14-slim
 
 WORKDIR /workspace
 
+
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PATH="/usr/lib/google-cloud-sdk/bin:/snap/bin:${PATH}"
 ENV container=docker
