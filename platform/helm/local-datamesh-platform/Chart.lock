@@ -1,0 +1,12 @@
+dependencies:
+- name: airflow
+  repository: https://airflow.apache.org
+  version: 1.18.0
+- name: mariadb
+  repository: https://charts.bitnami.com/bitnami
+  version: 22.0.0
+- name: nfs-server-provisioner
+  repository: https://kvaps.github.io/charts
+  version: 1.8.0
+digest: sha256:b139d21dec0d41779c312f1b99b801e8ddb68e1ea2c2d813ea16119a5702c9ba
+generated: "2026-10-25T06:14:45.838582314Z"

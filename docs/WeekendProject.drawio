@@ -1,6 +1,6 @@
 <mxfile host="Electron">
   <diagram name="Page-1" id="xgLNfRt65BB5RLUHj3e0">
-    <mxGraphModel dx="2949" dy="4264" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+    <mxGraphModel dx="2138" dy="3793" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -328,7 +328,7 @@
         <mxCell id="y52JixJ7wRb0NnyZzST0-5" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Kubernetes Cluster" vertex="1">
           <mxGeometry height="540.24" width="930" x="2270" y="-1630.3600000000001" as="geometry" />
         </mxCell>
-        <mxCell id="k1qyh8kehVlbWu1hkgJi-2" parent="y52JixJ7wRb0NnyZzST0-5" style="swimlane;whiteSpace=wrap;html=1;startSize=23;" value="Airflow Image (POD)" vertex="1">
+        <mxCell id="k1qyh8kehVlbWu1hkgJi-2" parent="y52JixJ7wRb0NnyZzST0-5" style="swimlane;whiteSpace=wrap;html=1;startSize=23;" value="Airflow DAG Processor (POD)" vertex="1">
           <mxGeometry height="279" width="290" x="50" y="50.24" as="geometry" />
         </mxCell>
         <mxCell id="k1qyh8kehVlbWu1hkgJi-3" parent="k1qyh8kehVlbWu1hkgJi-2" style="rounded=0;whiteSpace=wrap;html=1;" value="Astonomer - Cosmos" vertex="1">
@@ -406,6 +406,78 @@
         </mxCell>
         <mxCell id="y52JixJ7wRb0NnyZzST0-17" parent="1" style="shape=note;size=20;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;spacingTop=0;spacingLeft=2;fontColor=#333333;" value="Można stworzyć dedykowane &quot;POD image&quot; dla każdej z obsługiwanych Domen.&amp;nbsp;&lt;br&gt;Być może każda z nich będzie miała dodatkowe elementy.&amp;nbsp;&lt;br&gt;Cons: utrzymanie wielu obrazów." vertex="1">
           <mxGeometry height="119.82" width="220" x="3230" y="-1750.18" as="geometry" />
+        </mxCell>
+        <mxCell id="y52JixJ7wRb0NnyZzST0-23" parent="1" style="shape=note;size=20;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;spacingTop=0;spacingLeft=2;fontColor=#333333;" value="Można stworzyć dedykowane &quot;POD image&quot; dla każdej z obsługiwanych Domen.&amp;nbsp;&lt;br&gt;Być może każda z nich będzie miała dodatkowe elementy.&amp;nbsp;&lt;br&gt;Cons: utrzymanie wielu obrazów." vertex="1">
+          <mxGeometry height="119.82" width="310" x="1890" y="-1280.18" as="geometry" />
+        </mxCell>
+        <UserObject label="Kubernetes Node" link="https://kubernetes.io/docs/tutorials/configuration/configure-persistent-volume-storage/" linkTarget="_blank" id="lkROG7iNLG84FD_-9_Ww-1">
+          <mxCell parent="1" style="swimlane;whiteSpace=wrap;html=1;" vertex="1">
+            <mxGeometry height="533.68" width="670" x="3400" y="-1440.0000000000002" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="lkROG7iNLG84FD_-9_Ww-2" parent="lkROG7iNLG84FD_-9_Ww-1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;align=left;spacingLeft=3;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;PV&lt;/b&gt;&lt;br&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i style=&quot;&quot;&gt;metadata:&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i&gt;&amp;nbsp; name: &lt;span style=&quot;color: rgb(255, 51, 51);&quot;&gt;task-pv-volume&lt;/span&gt;&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i&gt;hostPath:&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i&gt;&amp;nbsp; &amp;nbsp; path: &quot;/mnt/data&quot;&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i&gt;&amp;nbsp; &amp;nbsp; type: Directory&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="110" width="170" x="20" y="45.360000000000014" as="geometry" />
+        </mxCell>
+        <mxCell id="lkROG7iNLG84FD_-9_Ww-4" parent="lkROG7iNLG84FD_-9_Ww-1" style="swimlane;whiteSpace=wrap;html=1;" value="Namespace - A" vertex="1">
+          <mxGeometry height="204.32" width="410" x="220" y="45.36" as="geometry">
+            <mxRectangle height="30" width="110" x="230" y="45.3599999999999" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lkROG7iNLG84FD_-9_Ww-5" parent="lkROG7iNLG84FD_-9_Ww-4" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;align=left;spacingLeft=4;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;div style=&quot;&quot;&gt;&lt;b style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;PVC&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;metadata:&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&amp;nbsp; name: &lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;task-pv-claim&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;spec:&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-size: 8px; background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;&amp;nbsp; volumeName:&lt;/span&gt;&lt;span style=&quot;font-size: 8px; background-color: transparent; color: light-dark(#FF0000,var(--ge-light-color, #ffffff));&quot;&gt; task-pv-volume&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="170" x="10" y="58.31999999999999" as="geometry" />
+        </mxCell>
+        <mxCell id="lkROG7iNLG84FD_-9_Ww-6" edge="1" parent="lkROG7iNLG84FD_-9_Ww-4" source="lkROG7iNLG84FD_-9_Ww-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;curved=1;curveGeometry=1;dashed=1;" target="lkROG7iNLG84FD_-9_Ww-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lkROG7iNLG84FD_-9_Ww-7" parent="lkROG7iNLG84FD_-9_Ww-4" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;align=left;spacingLeft=3;verticalAlign=top;" value="&lt;b&gt;POD&lt;/b&gt;&lt;br&gt;persistentVolumeClaim:&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;claimName:&amp;nbsp;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;task-pv-claim&lt;br&gt;&lt;br&gt;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="75.12" width="180" x="220" y="27.32" as="geometry" />
+        </mxCell>
+        <mxCell id="lkROG7iNLG84FD_-9_Ww-17" edge="1" parent="lkROG7iNLG84FD_-9_Ww-4" source="lkROG7iNLG84FD_-9_Ww-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;curved=1;curveGeometry=1;dashed=1;" target="lkROG7iNLG84FD_-9_Ww-5">
+          <mxGeometry relative="1" x="-0.0226" as="geometry" />
+        </mxCell>
+        <mxCell id="lkROG7iNLG84FD_-9_Ww-15" parent="lkROG7iNLG84FD_-9_Ww-4" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;align=left;spacingLeft=3;" value="&lt;b&gt;POD&lt;/b&gt;&lt;br&gt;persistentVolumeClaim:&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;claimName:&amp;nbsp;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;task-pv-claim&lt;/span&gt;" vertex="1">
+          <mxGeometry height="49.88" width="180" x="220" y="130.12000000000018" as="geometry" />
+        </mxCell>
+        <mxCell id="lkROG7iNLG84FD_-9_Ww-10" parent="lkROG7iNLG84FD_-9_Ww-1" style="swimlane;whiteSpace=wrap;html=1;" value="Namespace - B" vertex="1">
+          <mxGeometry height="255.36" width="410" x="220" y="263.68" as="geometry">
+            <mxRectangle height="30" width="110" x="230" y="45.3599999999999" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lkROG7iNLG84FD_-9_Ww-23" edge="1" parent="lkROG7iNLG84FD_-9_Ww-10" source="lkROG7iNLG84FD_-9_Ww-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;curved=1;curveGeometry=1;dashed=1;" target="lkROG7iNLG84FD_-9_Ww-21">
+          <mxGeometry relative="1" x="-0.25" as="geometry" />
+        </mxCell>
+        <mxCell id="lkROG7iNLG84FD_-9_Ww-13" parent="lkROG7iNLG84FD_-9_Ww-10" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;align=left;spacingLeft=3;" value="&lt;b&gt;POD&lt;/b&gt;&lt;br&gt;persistentVolumeClaim:&lt;br&gt;&amp;nbsp; claimName:&amp;nbsp;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;task-pv2-claim&lt;/span&gt;" vertex="1">
+          <mxGeometry height="49.88" width="180" x="215" y="165.06" as="geometry" />
+        </mxCell>
+        <mxCell id="lkROG7iNLG84FD_-9_Ww-21" parent="lkROG7iNLG84FD_-9_Ww-10" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;align=left;spacingLeft=4;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;div style=&quot;&quot;&gt;&lt;b style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;PVC&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;metadata:&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&amp;nbsp; name: &lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;task-pv2-claim&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;spec:&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-size: 8px; background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;&amp;nbsp; volumeName:&lt;/span&gt;&lt;span style=&quot;font-size: 8px; background-color: transparent; color: light-dark(#FF0000,var(--ge-light-color, #ffffff));&quot;&gt; task-pv2-volume&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="170" x="15" y="139.99999999999994" as="geometry" />
+        </mxCell>
+        <mxCell id="lkROG7iNLG84FD_-9_Ww-24" parent="lkROG7iNLG84FD_-9_Ww-10" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;align=left;spacingLeft=4;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;div style=&quot;&quot;&gt;&lt;b style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;PVC&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;metadata:&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&amp;nbsp; name: &lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;task-pv2-claim3&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;spec:&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-size: 8px; background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;&amp;nbsp; volumeName:&lt;/span&gt;&lt;span style=&quot;font-size: 8px; background-color: transparent; color: light-dark(#FF0000,var(--ge-light-color, #ffffff));&quot;&gt; task-pv-volume3&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="170" x="15" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="lkROG7iNLG84FD_-9_Ww-27" edge="1" parent="lkROG7iNLG84FD_-9_Ww-10" source="lkROG7iNLG84FD_-9_Ww-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;curved=1;curveGeometry=1;dashed=1;" target="lkROG7iNLG84FD_-9_Ww-24">
+          <mxGeometry relative="1" x="-0.25" as="geometry" />
+        </mxCell>
+        <mxCell id="lkROG7iNLG84FD_-9_Ww-26" parent="lkROG7iNLG84FD_-9_Ww-10" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;align=left;spacingLeft=3;" value="&lt;b&gt;POD&lt;/b&gt;&lt;br&gt;persistentVolumeClaim:&lt;br&gt;&amp;nbsp; claimName:&amp;nbsp;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;task-pv2-claim3&lt;/span&gt;" vertex="1">
+          <mxGeometry height="49.88" width="180" x="215" y="55.06" as="geometry" />
+        </mxCell>
+        <mxCell id="lkROG7iNLG84FD_-9_Ww-14" parent="lkROG7iNLG84FD_-9_Ww-1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;align=left;spacingLeft=3;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;PV&lt;/b&gt;&lt;br&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i style=&quot;&quot;&gt;metadata:&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i&gt;&amp;nbsp; name: &lt;span style=&quot;color: rgb(255, 51, 51);&quot;&gt;task-pv2-volume&lt;/span&gt;&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i&gt;hostPath:&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i&gt;&amp;nbsp; &amp;nbsp; path: &quot;/mnt/data2&quot;&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i style=&quot;&quot;&gt;&amp;nbsp; &amp;nbsp; type: Directory&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="110" width="170" x="20" y="398.68" as="geometry" />
+        </mxCell>
+        <mxCell id="lkROG7iNLG84FD_-9_Ww-18" edge="1" parent="lkROG7iNLG84FD_-9_Ww-1" source="lkROG7iNLG84FD_-9_Ww-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;curved=1;curveGeometry=1;dashed=1;" target="lkROG7iNLG84FD_-9_Ww-2">
+          <mxGeometry relative="1" x="0.0092" as="geometry" />
+        </mxCell>
+        <mxCell id="lkROG7iNLG84FD_-9_Ww-20" parent="lkROG7iNLG84FD_-9_Ww-1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;align=left;spacingLeft=3;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;PV&lt;/b&gt;&lt;br&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i style=&quot;&quot;&gt;metadata:&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i&gt;&amp;nbsp; name: &lt;span style=&quot;color: rgb(255, 51, 51);&quot;&gt;task-pv-volume3&lt;/span&gt;&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i&gt;hostPath:&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i&gt;&amp;nbsp; &amp;nbsp; path: &quot;/mnt/data&quot;&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i&gt;&amp;nbsp; &amp;nbsp; type: Directory&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="110" width="170" x="20" y="163.68000000000006" as="geometry" />
+        </mxCell>
+        <mxCell id="lkROG7iNLG84FD_-9_Ww-22" edge="1" parent="lkROG7iNLG84FD_-9_Ww-1" source="lkROG7iNLG84FD_-9_Ww-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;curved=1;curveGeometry=1;dashed=1;" target="lkROG7iNLG84FD_-9_Ww-14">
+          <mxGeometry relative="1" x="0.0079" as="geometry" />
+        </mxCell>
+        <mxCell id="lkROG7iNLG84FD_-9_Ww-25" edge="1" parent="lkROG7iNLG84FD_-9_Ww-1" source="lkROG7iNLG84FD_-9_Ww-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;curved=1;curveGeometry=1;dashed=1;" target="lkROG7iNLG84FD_-9_Ww-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lkROG7iNLG84FD_-9_Ww-28" parent="1" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Persistent Volumes - współdzielenie&lt;/h1&gt;&lt;p&gt;Można zmieniać parametry PV (np. capacity).&amp;nbsp;&lt;br&gt;Nie można zmieniać parametrów PVC (np. request.storage)&lt;br&gt;PVC można powiązać z konkretnym PV po przez spec.volumeName&lt;/p&gt;" vertex="1">
+          <mxGeometry height="120" width="670" x="3400" y="-1570.12" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
