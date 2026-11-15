@@ -4,9 +4,10 @@ metadata:
   name: dbt-releases
   namespace: airflow
 spec:
+  storageClassName: manual
   accessModes:
     - ReadWriteMany
-  storageClassName: nfs-rwx
   resources:
     requests:
-      storage: 10Gi
+      storage: 1Gi
+  volumeName: dbt-releases-pvc

@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: git-repo-reader
+  namespace: repo-reader
+  labels:
+    app: git-repo-reader
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: git-repo-reader
+  template:
+    metadata:
+      labels:
+        app: git-repo-reader
+    spec:
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - topologyKey: kubernetes.io/hostname
+              namespaces:
+                - dlh-sales
+                - dlh-logistics
+              labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - dlh-sales-platform
+                      - dlh-logistics-platform
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65533
+        runAsGroup: 65533
+      containers:
+        - name: reader
+          image: python:3.14-slim
+          imagePullPolicy: IfNotPresent
+          command:
+            - python
+            - -c
+          args:
+            - |
+              import time
+              print("Repository reader started; repositories are mounted at /repositories", flush=True)
+              time.sleep(10**9)
+          volumeMounts:
+            - name: git-repositories
+              mountPath: /repositories
+              readOnly: true
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+      volumes:
+        - name: git-repositories
+          hostPath:
+            path: /mnt/git
+            type: Directory

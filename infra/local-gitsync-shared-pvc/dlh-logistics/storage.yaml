@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dlh-logistics-git-repo
+  namespace: dlh-logistics
+  labels:
+    app: dlh-logistics-platform
+    env: prod
+spec:
+  storageClassName: ""
+  volumeName: dlh-logistics-git-pv
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+

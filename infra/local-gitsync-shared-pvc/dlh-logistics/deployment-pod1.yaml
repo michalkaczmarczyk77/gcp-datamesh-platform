@@ -1,0 +1,109 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dlh-logistics-pod1
+  namespace: dlh-logistics
+  labels:
+    app: dlh-logistics-platform
+    env: prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dlh-logistics-platform
+  template:
+    metadata:
+      labels:
+        app: dlh-logistics-platform
+    spec:
+      securityContext:
+        fsGroup: 65533
+        runAsNonRoot: true
+
+      containers:
+        - name: python
+          image: python:3.14-slim
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 65533
+            runAsGroup: 65533
+
+          imagePullPolicy: IfNotPresent
+
+          # Replace this with the actual command for your application.
+          command:
+            - python
+            - -c
+          args:
+            - |
+              import time
+              print("pod1 started", flush=True)
+              time.sleep(10**9)
+
+          volumeMounts:
+            - name: dlh-logistics-repo
+              mountPath: /shared
+              subPath: dlh-logistics
+
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+
+        - name: git-sync
+          image: registry.k8s.io/git-sync/git-sync:v4.4.2
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 65533
+            runAsGroup: 65533
+
+          imagePullPolicy: IfNotPresent
+
+          env:
+            - name: GITSYNC_REPO
+              value: "https://github.com/michalkaczmarczyk77/dlh-logistics.git"
+
+            - name: GITSYNC_REF
+              value: "main"
+
+            - name: GITSYNC_ROOT
+              value: "/git"
+
+            - name: GITSYNC_LINK
+              value: "current"
+
+            - name: GITSYNC_PERIOD
+              value: "30s"
+
+            - name: GITSYNC_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: dlh-logistics-github-read-token
+                  key: username
+
+            - name: GITSYNC_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: dlh-logistics-github-read-token
+                  key: password
+
+          volumeMounts:
+            - name: dlh-logistics-repo
+              mountPath: /git
+              subPath: dlh-logistics
+
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "32Mi"
+            limits:
+              cpu: "200m"
+              memory: "128Mi"
+
+      volumes:
+        - name: dlh-logistics-repo
+          persistentVolumeClaim:
+            claimName: dlh-logistics-git-repo

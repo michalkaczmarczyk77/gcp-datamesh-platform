@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: dlh-logistics-git-pv
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ""
+  claimRef:
+    namespace: dlh-logistics
+    name: dlh-logistics-git-repo
+  hostPath:
+    path: /mnt/git/dlh-logistics
+    type: DirectoryOrCreate

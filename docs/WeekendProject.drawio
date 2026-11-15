@@ -1,6 +1,6 @@
-<mxfile host="Electron">
+<mxfile host="Electron" pages="3">
   <diagram name="Page-1" id="xgLNfRt65BB5RLUHj3e0">
-    <mxGraphModel dx="2138" dy="3793" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+    <mxGraphModel dx="846" dy="3047" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="light-dark(#ffffff, #121212)" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -310,7 +310,7 @@
         <mxCell id="y52JixJ7wRb0NnyZzST0-10" edge="1" parent="1" source="y52JixJ7wRb0NnyZzST0-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;curved=1;curveGeometry=1;dashed=1;" target="y52JixJ7wRb0NnyZzST0-9">
           <mxGeometry relative="1" x="-0.0008" as="geometry" />
         </mxCell>
-        <mxCell id="y52JixJ7wRb0NnyZzST0-1" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Git Repo: Sales" vertex="1">
+        <mxCell id="y52JixJ7wRb0NnyZzST0-1" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Git: dlh-logistics" vertex="1">
           <mxGeometry height="110" width="200" x="2960" y="-990" as="geometry" />
         </mxCell>
         <mxCell id="y52JixJ7wRb0NnyZzST0-2" parent="y52JixJ7wRb0NnyZzST0-1" style="rounded=0;whiteSpace=wrap;html=1;" value="/models/manifest.js" vertex="1">
@@ -319,14 +319,14 @@
         <mxCell id="y52JixJ7wRb0NnyZzST0-11" edge="1" parent="1" source="y52JixJ7wRb0NnyZzST0-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;curved=1;curveGeometry=1;dashed=1;" target="y52JixJ7wRb0NnyZzST0-9">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="y52JixJ7wRb0NnyZzST0-3" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Git Repo: Finance" vertex="1">
+        <mxCell id="y52JixJ7wRb0NnyZzST0-3" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Git&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;: dlh-sales&lt;/span&gt;" vertex="1">
           <mxGeometry height="110" width="200" x="2730" y="-990" as="geometry" />
         </mxCell>
         <mxCell id="y52JixJ7wRb0NnyZzST0-4" parent="y52JixJ7wRb0NnyZzST0-3" style="rounded=0;whiteSpace=wrap;html=1;" value="/models/manifest.js" vertex="1">
           <mxGeometry height="60" width="120" x="40" y="34" as="geometry" />
         </mxCell>
-        <mxCell id="y52JixJ7wRb0NnyZzST0-5" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Kubernetes Cluster" vertex="1">
-          <mxGeometry height="540.24" width="930" x="2270" y="-1630.3600000000001" as="geometry" />
+        <mxCell id="y52JixJ7wRb0NnyZzST0-5" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Kubernetes Namespace" vertex="1">
+          <mxGeometry height="540.24" width="1010" x="2270" y="-1630.36" as="geometry" />
         </mxCell>
         <mxCell id="k1qyh8kehVlbWu1hkgJi-2" parent="y52JixJ7wRb0NnyZzST0-5" style="swimlane;whiteSpace=wrap;html=1;startSize=23;" value="Airflow DAG Processor (POD)" vertex="1">
           <mxGeometry height="279" width="290" x="50" y="50.24" as="geometry" />
@@ -389,17 +389,23 @@
         <mxCell id="y52JixJ7wRb0NnyZzST0-6" parent="y52JixJ7wRb0NnyZzST0-5" style="swimlane;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Shared Storage (PV - PersistantVolume)" vertex="1">
           <mxGeometry height="119.82" width="300" x="250" y="380" as="geometry" />
         </mxCell>
-        <mxCell id="y52JixJ7wRb0NnyZzST0-7" parent="y52JixJ7wRb0NnyZzST0-6" style="rounded=0;whiteSpace=wrap;html=1;" value="SALES:&lt;br&gt;/models/manifest.js" vertex="1">
+        <mxCell id="y52JixJ7wRb0NnyZzST0-7" parent="y52JixJ7wRb0NnyZzST0-6" style="rounded=0;whiteSpace=wrap;html=1;" value="SALES:&lt;br&gt;/share/sales/manifest.js" vertex="1">
           <mxGeometry height="60" width="120" x="20" y="40" as="geometry" />
         </mxCell>
-        <mxCell id="y52JixJ7wRb0NnyZzST0-8" parent="y52JixJ7wRb0NnyZzST0-6" style="rounded=0;whiteSpace=wrap;html=1;" value="FINANCE:&lt;br&gt;/models/manifest.js" vertex="1">
+        <mxCell id="y52JixJ7wRb0NnyZzST0-8" parent="y52JixJ7wRb0NnyZzST0-6" style="rounded=0;whiteSpace=wrap;html=1;" value="FINANCE:&lt;br&gt;/share/finance/manifest.js" vertex="1">
           <mxGeometry height="60" width="120" x="160" y="40" as="geometry" />
         </mxCell>
         <mxCell id="y52JixJ7wRb0NnyZzST0-12" edge="1" parent="y52JixJ7wRb0NnyZzST0-5" source="y52JixJ7wRb0NnyZzST0-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;curved=1;curveGeometry=1;dashed=1;" target="y52JixJ7wRb0NnyZzST0-6">
           <mxGeometry relative="1" x="0.003" as="geometry" />
         </mxCell>
-        <mxCell id="y52JixJ7wRb0NnyZzST0-9" parent="y52JixJ7wRb0NnyZzST0-5" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fillColor=#f8cecc;strokeColor=#b85450;" value="? GitSync ?" vertex="1">
+        <mxCell id="kvEfo4Lc85I2SE0b7D9y-2" edge="1" parent="y52JixJ7wRb0NnyZzST0-5" source="y52JixJ7wRb0NnyZzST0-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;dashed=1;curved=1;curveGeometry=1;" target="kvEfo4Lc85I2SE0b7D9y-1">
+          <mxGeometry relative="1" x="-0.0129" as="geometry" />
+        </mxCell>
+        <mxCell id="y52JixJ7wRb0NnyZzST0-9" parent="y52JixJ7wRb0NnyZzST0-5" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fillColor=#f8cecc;strokeColor=#b85450;" value="? GitSync ?&lt;br&gt;sidecar" vertex="1">
           <mxGeometry height="60" width="120" x="630" y="410.00000000000006" as="geometry" />
+        </mxCell>
+        <mxCell id="kvEfo4Lc85I2SE0b7D9y-1" parent="y52JixJ7wRb0NnyZzST0-5" style="shape=note;size=20;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacingTop=0;spacingLeft=2;fontSize=8;" value="&lt;div&gt;- authenticating to GitHub;&lt;/div&gt;&lt;div&gt;- cloning the requested repository and branch;&lt;/div&gt;&lt;div&gt;- recording the commit that was cloned;&lt;/div&gt;&lt;div&gt;- placing the files in the shared workspace.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="200" x="790" y="394.91" as="geometry" />
         </mxCell>
         <mxCell id="y52JixJ7wRb0NnyZzST0-18" edge="1" parent="1" source="y52JixJ7wRb0NnyZzST0-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;curved=1;curveGeometry=1;dashed=1;endArrow=none;endFill=0;" target="k1qyh8kehVlbWu1hkgJi-4">
           <mxGeometry relative="1" x="0.0025" as="geometry" />
@@ -407,19 +413,16 @@
         <mxCell id="y52JixJ7wRb0NnyZzST0-17" parent="1" style="shape=note;size=20;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;spacingTop=0;spacingLeft=2;fontColor=#333333;" value="Można stworzyć dedykowane &quot;POD image&quot; dla każdej z obsługiwanych Domen.&amp;nbsp;&lt;br&gt;Być może każda z nich będzie miała dodatkowe elementy.&amp;nbsp;&lt;br&gt;Cons: utrzymanie wielu obrazów." vertex="1">
           <mxGeometry height="119.82" width="220" x="3230" y="-1750.18" as="geometry" />
         </mxCell>
-        <mxCell id="y52JixJ7wRb0NnyZzST0-23" parent="1" style="shape=note;size=20;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;spacingTop=0;spacingLeft=2;fontColor=#333333;" value="Można stworzyć dedykowane &quot;POD image&quot; dla każdej z obsługiwanych Domen.&amp;nbsp;&lt;br&gt;Być może każda z nich będzie miała dodatkowe elementy.&amp;nbsp;&lt;br&gt;Cons: utrzymanie wielu obrazów." vertex="1">
-          <mxGeometry height="119.82" width="310" x="1890" y="-1280.18" as="geometry" />
-        </mxCell>
-        <UserObject label="Kubernetes Node" link="https://kubernetes.io/docs/tutorials/configuration/configure-persistent-volume-storage/" linkTarget="_blank" id="lkROG7iNLG84FD_-9_Ww-1">
+        <UserObject label="Kubernetes Node" link="https://github.com/kubernetes-csi/csi-driver-nfs#readme" linkTarget="_blank" id="lkROG7iNLG84FD_-9_Ww-1">
           <mxCell parent="1" style="swimlane;whiteSpace=wrap;html=1;" vertex="1">
-            <mxGeometry height="533.68" width="670" x="3400" y="-1440.0000000000002" as="geometry" />
+            <mxGeometry height="533.68" width="780" x="3400" y="-1440" as="geometry" />
           </mxCell>
         </UserObject>
         <mxCell id="lkROG7iNLG84FD_-9_Ww-2" parent="lkROG7iNLG84FD_-9_Ww-1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;align=left;spacingLeft=3;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;PV&lt;/b&gt;&lt;br&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i style=&quot;&quot;&gt;metadata:&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i&gt;&amp;nbsp; name: &lt;span style=&quot;color: rgb(255, 51, 51);&quot;&gt;task-pv-volume&lt;/span&gt;&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i&gt;hostPath:&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i&gt;&amp;nbsp; &amp;nbsp; path: &quot;/mnt/data&quot;&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i&gt;&amp;nbsp; &amp;nbsp; type: Directory&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="110" width="170" x="20" y="45.360000000000014" as="geometry" />
         </mxCell>
         <mxCell id="lkROG7iNLG84FD_-9_Ww-4" parent="lkROG7iNLG84FD_-9_Ww-1" style="swimlane;whiteSpace=wrap;html=1;" value="Namespace - A" vertex="1">
-          <mxGeometry height="204.32" width="410" x="220" y="45.36" as="geometry">
+          <mxGeometry height="204.32" width="410" x="350" y="45.36" as="geometry">
             <mxRectangle height="30" width="110" x="230" y="45.3599999999999" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
@@ -439,7 +442,7 @@
           <mxGeometry height="49.88" width="180" x="220" y="130.12000000000018" as="geometry" />
         </mxCell>
         <mxCell id="lkROG7iNLG84FD_-9_Ww-10" parent="lkROG7iNLG84FD_-9_Ww-1" style="swimlane;whiteSpace=wrap;html=1;" value="Namespace - B" vertex="1">
-          <mxGeometry height="255.36" width="410" x="220" y="263.68" as="geometry">
+          <mxGeometry height="255.36" width="410" x="350" y="263.68" as="geometry">
             <mxRectangle height="30" width="110" x="230" y="45.3599999999999" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
@@ -465,7 +468,12 @@
           <mxGeometry height="110" width="170" x="20" y="398.68" as="geometry" />
         </mxCell>
         <mxCell id="lkROG7iNLG84FD_-9_Ww-18" edge="1" parent="lkROG7iNLG84FD_-9_Ww-1" source="lkROG7iNLG84FD_-9_Ww-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;curved=1;curveGeometry=1;dashed=1;" target="lkROG7iNLG84FD_-9_Ww-2">
-          <mxGeometry relative="1" x="0.0092" as="geometry" />
+          <mxGeometry relative="1" x="-0.0153" as="geometry">
+            <Array as="points">
+              <mxPoint x="275" y="150" />
+              <mxPoint x="275" y="100.4" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="lkROG7iNLG84FD_-9_Ww-20" parent="lkROG7iNLG84FD_-9_Ww-1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;align=left;spacingLeft=3;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;PV&lt;/b&gt;&lt;br&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i style=&quot;&quot;&gt;metadata:&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i&gt;&amp;nbsp; name: &lt;span style=&quot;color: rgb(255, 51, 51);&quot;&gt;task-pv-volume3&lt;/span&gt;&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i&gt;hostPath:&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i&gt;&amp;nbsp; &amp;nbsp; path: &quot;/mnt/data&quot;&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i&gt;&amp;nbsp; &amp;nbsp; type: Directory&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="110" width="170" x="20" y="163.68000000000006" as="geometry" />
@@ -474,10 +482,469 @@
           <mxGeometry relative="1" x="0.0079" as="geometry" />
         </mxCell>
         <mxCell id="lkROG7iNLG84FD_-9_Ww-25" edge="1" parent="lkROG7iNLG84FD_-9_Ww-1" source="lkROG7iNLG84FD_-9_Ww-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;curved=1;curveGeometry=1;dashed=1;" target="lkROG7iNLG84FD_-9_Ww-20">
-          <mxGeometry relative="1" as="geometry" />
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="270" y="343.7" />
+              <mxPoint x="270" y="218.7" />
+            </Array>
+          </mxGeometry>
         </mxCell>
+        <UserObject label="StorageClass" link="https://kubernetes.io/docs/concepts/storage/storage-classes/" linkTarget="_blank" id="89f72CfFBLwY8EEWvWja-1">
+          <mxCell parent="lkROG7iNLG84FD_-9_Ww-1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1">
+            <mxGeometry height="38.74" width="170" x="20" y="280" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="NFS CSI Driver for Kubernetes" link="https://kubernetes.io/docs/concepts/storage/storage-classes/" linkTarget="_blank" id="89f72CfFBLwY8EEWvWja-2">
+          <mxCell parent="lkROG7iNLG84FD_-9_Ww-1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1">
+            <mxGeometry height="38.74" width="170" x="40" y="309.99999999999994" as="geometry" />
+          </mxCell>
+        </UserObject>
         <mxCell id="lkROG7iNLG84FD_-9_Ww-28" parent="1" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Persistent Volumes - współdzielenie&lt;/h1&gt;&lt;p&gt;Można zmieniać parametry PV (np. capacity).&amp;nbsp;&lt;br&gt;Nie można zmieniać parametrów PVC (np. request.storage)&lt;br&gt;PVC można powiązać z konkretnym PV po przez spec.volumeName&lt;/p&gt;" vertex="1">
           <mxGeometry height="120" width="670" x="3400" y="-1570.12" as="geometry" />
+        </mxCell>
+        <mxCell id="GpEO7rEtCAvsXgzTwiWa-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" value="&lt;b&gt;Airflow Image&lt;br&gt;&lt;/b&gt;&lt;br&gt;&lt;blockquote style=&quot;margin: 0px 0px 0px 40px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; padding: 0px;&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;- Apache &lt;b&gt;Airflow&lt;/b&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;- Astronomer &lt;b&gt;Cosmos&lt;/b&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;- Kubernetes provider&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;- No dbt runtime unless absolutely necessary for parsing&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;dbt image&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;i style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;&lt;b&gt;pvc:/shared -&amp;gt;&amp;nbsp;&lt;/b&gt;&lt;/i&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;&lt;b&gt;/opt/&lt;br&gt;&lt;/b&gt;&lt;br&gt;lub oddzielnie montować&lt;br&gt;&lt;br&gt;&lt;/span&gt;&lt;i style=&quot;background-color: transparent;&quot;&gt;&lt;b&gt;pvc:/shared/sales -&amp;gt; &lt;/b&gt;&lt;/i&gt;&lt;b style=&quot;background-color: transparent;&quot;&gt;/opt/sales&lt;br&gt;&lt;/b&gt;&lt;i style=&quot;background-color: transparent;&quot;&gt;&lt;b&gt;pvc:/shared/finance -&amp;gt; &lt;/b&gt;&lt;/i&gt;&lt;b style=&quot;background-color: transparent;&quot;&gt;/opt/finance&lt;/b&gt;&lt;b style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;&lt;/b&gt;&lt;/div&gt;&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
+          <mxGeometry height="244" width="240" x="2460" y="-524" as="geometry" />
+        </mxCell>
+        <mxCell id="GpEO7rEtCAvsXgzTwiWa-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" value="Git Repo: Domain Sales&lt;br&gt;&lt;br&gt;/dbt/models/&lt;br&gt;model1&lt;br&gt;model2" vertex="1">
+          <mxGeometry height="120" width="240" x="2750" y="-298.2" as="geometry" />
+        </mxCell>
+        <mxCell id="GpEO7rEtCAvsXgzTwiWa-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" value="Git Repo: Domain Finance&lt;br&gt;&lt;br&gt;/dbt/models&lt;br&gt;model1&lt;br&gt;model2" vertex="1">
+          <mxGeometry height="120" width="240" x="3010" y="-298.2" as="geometry" />
+        </mxCell>
+        <mxCell id="GpEO7rEtCAvsXgzTwiWa-14" edge="1" parent="1" source="GpEO7rEtCAvsXgzTwiWa-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;dashed=1;curved=1;curveGeometry=1;" target="GpEO7rEtCAvsXgzTwiWa-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GpEO7rEtCAvsXgzTwiWa-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" value="Shared Volume&lt;br&gt;&lt;div&gt;&lt;br/&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="120" width="500" x="2750" y="-500.56" as="geometry" />
+        </mxCell>
+        <mxCell id="GpEO7rEtCAvsXgzTwiWa-6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" value="&lt;b&gt;Sales DBT Image&lt;br&gt;&lt;/b&gt;&lt;br&gt;&lt;blockquote style=&quot;margin: 0px 0px 0px 40px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; padding: 0px;&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;div&gt;- &lt;b&gt;dbt-core&lt;/b&gt;&lt;/div&gt;&lt;div&gt;- &lt;b&gt;dbt adapter package&lt;/b&gt;&lt;/div&gt;&lt;div&gt;- your dbt project code&lt;/div&gt;&lt;div&gt;no Airflow packages&lt;/div&gt;&lt;div&gt;- Shared path,&amp;nbsp;contains project files and&amp;nbsp; target/manifest.json&lt;br&gt;&lt;br&gt;&lt;i&gt;&lt;b&gt;pvc:/shared/sales/dbt&lt;br&gt;-&amp;gt; /opt/dbt/&lt;/b&gt;&lt;/i&gt;&lt;/div&gt;&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
+          <mxGeometry height="166.64" width="240" x="2750" y="-705.64" as="geometry" />
+        </mxCell>
+        <mxCell id="GpEO7rEtCAvsXgzTwiWa-13" edge="1" parent="1" source="GpEO7rEtCAvsXgzTwiWa-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;dashed=1;curved=1;curveGeometry=1;" target="GpEO7rEtCAvsXgzTwiWa-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GpEO7rEtCAvsXgzTwiWa-7" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="/shared/&lt;b&gt;finance&lt;br&gt;dags&lt;br&gt;dbt&lt;/b&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="3070" y="-456.2" as="geometry" />
+        </mxCell>
+        <mxCell id="GpEO7rEtCAvsXgzTwiWa-12" edge="1" parent="1" source="GpEO7rEtCAvsXgzTwiWa-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;dashed=1;curved=1;curveGeometry=1;" target="GpEO7rEtCAvsXgzTwiWa-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GpEO7rEtCAvsXgzTwiWa-8" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="/shared/&lt;b&gt;sales&lt;br&gt;dags&lt;br&gt;dbt&lt;/b&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="2810" y="-456.2" as="geometry" />
+        </mxCell>
+        <mxCell id="GpEO7rEtCAvsXgzTwiWa-9" edge="1" parent="1" source="GpEO7rEtCAvsXgzTwiWa-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;dashed=1;curved=1;curveGeometry=1;" target="GpEO7rEtCAvsXgzTwiWa-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GpEO7rEtCAvsXgzTwiWa-10" edge="1" parent="1" source="GpEO7rEtCAvsXgzTwiWa-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;dashed=1;curved=1;curveGeometry=1;" target="GpEO7rEtCAvsXgzTwiWa-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GpEO7rEtCAvsXgzTwiWa-11" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" value="&lt;b&gt;Finance DBT Image&lt;br&gt;&lt;/b&gt;&lt;br&gt;&lt;blockquote style=&quot;margin: 0px 0px 0px 40px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; padding: 0px;&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;div&gt;- dbt-core&lt;/div&gt;&lt;div&gt;- dbt adapter package&lt;/div&gt;&lt;div&gt;- your dbt project code&lt;/div&gt;&lt;div&gt;no Airflow packages&lt;/div&gt;&lt;div&gt;- Shared path,&amp;nbsp;contains project files and&amp;nbsp; target/manifest.json&lt;br&gt;&lt;br&gt;&lt;i&gt;&lt;b&gt;pvc:/shared/finance/dbt&lt;br&gt;-&amp;gt;&amp;nbsp;&lt;/b&gt;&lt;/i&gt;&lt;i&gt;&lt;b&gt;/opt/dbt/&lt;/b&gt;&lt;/i&gt;&lt;/div&gt;&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
+          <mxGeometry height="166.64" width="240" x="3010" y="-705.64" as="geometry" />
+        </mxCell>
+        <mxCell id="GpEO7rEtCAvsXgzTwiWa-16" parent="1" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;strokeColor=#0066CC;fillColor=#FFE599;verticalAlign=top;fontColor=#004C99;align=left;spacingRight=0;spacingLeft=8;" value="&lt;font style=&quot;&quot;&gt;&lt;span style=&quot;font-weight: bold; font-size: 16px;&quot;&gt;Challenges&lt;/span&gt;&lt;br&gt;&lt;br&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;color: rgb(51, 51, 51); font-size: x-small; background-color: transparent;&quot;&gt;- Jakim mechanizmem synchronizować GitRepo z Shared Volume?&lt;br&gt;- Co się dzieje gdy Shared Volume jest uaktualniane w trakcie parsowania DAG&#39;a. Może dojść do niespójności?&lt;br&gt;- Co jeśli Domena, oprócz DBT, chiciała by implementować elementy przepływów jako Airflow Dag. Czy można kod Python, Airflow również przechowywać w tym samym repo do DBT? Hmmm... chyba tak, nawet miało by to sens.&lt;/span&gt;&lt;/div&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="166.64" width="510" x="3330" y="-705.64" as="geometry" />
+        </mxCell>
+        <mxCell id="GpEO7rEtCAvsXgzTwiWa-17" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="Secret Store" vertex="1">
+          <mxGeometry height="60" width="100" x="3280" y="-435.56" as="geometry" />
+        </mxCell>
+        <mxCell id="GpEO7rEtCAvsXgzTwiWa-18" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" value="PV" vertex="1">
+          <mxGeometry height="60" width="100" x="3280" y="-505.56" as="geometry" />
+        </mxCell>
+        <mxCell id="GpEO7rEtCAvsXgzTwiWa-19" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" value="PVC" vertex="1">
+          <mxGeometry height="60" width="100" x="3390" y="-505.56" as="geometry" />
+        </mxCell>
+        <mxCell id="GpEO7rEtCAvsXgzTwiWa-20" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" value="SQL Database" vertex="1">
+          <mxGeometry height="60" width="100" x="3390" y="-435.56" as="geometry" />
+        </mxCell>
+        <mxCell id="GpEO7rEtCAvsXgzTwiWa-21" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" value="Init Container&lt;br&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 9px;&quot;&gt;can:&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 9px;&quot;&gt;clone the git repository&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 9px;&quot;&gt;run&amp;nbsp; dbt deps&amp;nbsp;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 9px;&quot;&gt;generate&amp;nbsp; manifest.json&amp;nbsp;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 9px;&quot;&gt;place results into the shared volume&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="200" x="3280" y="-350" as="geometry" />
+        </mxCell>
+        <mxCell id="GpEO7rEtCAvsXgzTwiWa-22" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" value="CI/CD pipeline strategy&lt;br&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;div&gt;&lt;font size=&quot;1&quot;&gt;lint dbt project&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font size=&quot;1&quot;&gt;build dbt image&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font size=&quot;1&quot;&gt;generate dbt artifacts&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font size=&quot;1&quot;&gt;publish artifacts to shared storage&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font size=&quot;1&quot;&gt;deploy or refresh Airflow&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font size=&quot;1&quot;&gt;restart scheduler if manifest-driven DAGs need reload&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font size=&quot;1&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font size=&quot;1&quot;&gt;Good practice&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font size=&quot;1&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font size=&quot;1&quot;&gt;Use the same git commit to build:&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font size=&quot;1&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font size=&quot;1&quot;&gt;the dbt image&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font size=&quot;1&quot;&gt;the manifest artifacts&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font size=&quot;1&quot;&gt;the Airflow deployment version&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font size=&quot;1&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font size=&quot;1&quot;&gt;That prevents version drift.&lt;/font&gt;&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="260" width="260" x="3510" y="-350" as="geometry" />
+        </mxCell>
+        <mxCell id="7izxXxwgFh8l3v5zFCx5-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;strokeColor=#b85450;fillColor=#f8cecc;verticalAlign=top;align=left;spacingRight=0;spacingLeft=8;" value="&lt;font style=&quot;&quot;&gt;&lt;span style=&quot;font-weight: bold; font-size: 16px;&quot;&gt;gitSync&lt;/span&gt;&lt;br&gt;&lt;br&gt;&lt;div style=&quot;&quot;&gt;&lt;font color=&quot;#333333&quot; size=&quot;1&quot;&gt;w celu ograniczenia częstotliwości synchronizacji z Github.&amp;nbsp;&lt;br&gt;Zastosować mechanizm uruchamiania synchronizacji tylko po &quot;push to main&quot;.&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;font color=&quot;#333333&quot; size=&quot;1&quot;&gt;Np. po przez wykorzystanie CI/CD lub hooks.&lt;br&gt;&lt;br&gt;Przetestować 2 modele synchronizacji:&lt;br&gt;- synchronizacja shared volume, które jest podmontowane przez potrzebujące POD&#39;y&lt;br&gt;- wymuszenie synchronizacji przez poszczególne POD&#39;y - wówczas dane będą kopiowane na potrzebujące POD&#39;y&lt;/font&gt;&lt;/div&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="180" width="360" x="3850" y="-704" as="geometry" />
+        </mxCell>
+        <mxCell id="7izxXxwgFh8l3v5zFCx5-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;strokeColor=#b85450;fillColor=#f8cecc;verticalAlign=top;align=left;spacingRight=0;spacingLeft=8;" value="&lt;font style=&quot;&quot;&gt;&lt;span style=&quot;font-weight: bold; font-size: 16px;&quot;&gt;Kubernetes - TODO&lt;/span&gt;&lt;br&gt;&lt;br&gt;&lt;div style=&quot;&quot;&gt;&lt;font color=&quot;#333333&quot; size=&quot;1&quot;&gt;- Jobs&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;font color=&quot;#333333&quot; size=&quot;1&quot;&gt;- CronJobs&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;font color=&quot;#333333&quot; size=&quot;1&quot;&gt;- StorageClasses&lt;br&gt;- ConfigMaps&lt;br&gt;- Secrets&lt;/font&gt;&lt;/div&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="125" width="160" x="3850" y="-505.56" as="geometry" />
+        </mxCell>
+        <mxCell id="7izxXxwgFh8l3v5zFCx5-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;strokeColor=#b85450;fillColor=#f8cecc;verticalAlign=top;align=left;spacingRight=0;spacingLeft=8;" value="&lt;font style=&quot;&quot;&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;Helm Charts&lt;/b&gt;&lt;/span&gt;&lt;br&gt;&lt;br&gt;&lt;div style=&quot;&quot;&gt;&lt;font color=&quot;#333333&quot; size=&quot;1&quot;&gt;- HelmHooks&lt;/font&gt;&lt;/div&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="125" width="130" x="3850" y="-362" as="geometry" />
+        </mxCell>
+        <mxCell id="7izxXxwgFh8l3v5zFCx5-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;strokeColor=#b85450;fillColor=#f8cecc;verticalAlign=top;align=left;spacingRight=0;spacingLeft=8;" value="&lt;font style=&quot;&quot;&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;AirFlow Helm Charts&lt;/b&gt;&lt;/span&gt;&lt;br&gt;&lt;br&gt;&lt;div style=&quot;&quot;&gt;&lt;font color=&quot;#333333&quot; size=&quot;1&quot;&gt;- useHelmHooks [createUserJob, migrateDatabaseJob]&lt;/font&gt;&lt;/div&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="125" width="190" x="3990" y="-362" as="geometry" />
+        </mxCell>
+        <mxCell id="B5R3c4a1OnU4q1mFWgxQ-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="Secret (namespace - scoped)" vertex="1">
+          <mxGeometry height="60" width="160" x="2920" y="-800" as="geometry" />
+        </mxCell>
+        <UserObject label="Kubernetes Node" link="https://github.com/kubernetes-csi/csi-driver-nfs#readme" linkTarget="_blank" id="_qhj__XsBIJN-wBpZMDc-1">
+          <mxCell parent="1" style="swimlane;whiteSpace=wrap;html=1;" vertex="1">
+            <mxGeometry height="820.12" width="780" x="4280" y="-1450.12" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="_qhj__XsBIJN-wBpZMDc-2" parent="_qhj__XsBIJN-wBpZMDc-1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;align=left;spacingLeft=3;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;PV&lt;/b&gt;&lt;br&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i style=&quot;&quot;&gt;metadata:&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i&gt;&amp;nbsp; name:&amp;nbsp;&lt;/i&gt;&lt;/font&gt;&lt;span style=&quot;background-color: transparent; font-size: 8px;&quot;&gt;&lt;font color=&quot;#ff3333&quot;&gt;&lt;i&gt;dlh-sales-git-pv&lt;/i&gt;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i&gt;hostPath:&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i&gt;&amp;nbsp; &amp;nbsp; path: &quot;/mnt/git/dlh-sales&quot;&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i&gt;&amp;nbsp; &amp;nbsp; type: Directory&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="110" width="170" x="150" y="156.84" as="geometry" />
+        </mxCell>
+        <mxCell id="_qhj__XsBIJN-wBpZMDc-3" parent="_qhj__XsBIJN-wBpZMDc-1" style="swimlane;whiteSpace=wrap;html=1;" value="dlh-sales [namespace]" vertex="1">
+          <mxGeometry height="221.48" width="410" x="350" y="45.36" as="geometry">
+            <mxRectangle height="30" width="110" x="230" y="45.3599999999999" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_qhj__XsBIJN-wBpZMDc-4" parent="_qhj__XsBIJN-wBpZMDc-3" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;align=left;spacingLeft=4;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;div style=&quot;&quot;&gt;&lt;b style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;PVC&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;metadata:&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&amp;nbsp; name: &lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;dlh-sales-git-repo&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;spec:&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-size: 8px; background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;&amp;nbsp; volumeName:&lt;/span&gt;&lt;span style=&quot;font-size: 8px; background-color: transparent; color: light-dark(#FF0000,var(--ge-light-color, #ffffff));&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: transparent; font-size: 8px;&quot;&gt;&lt;font color=&quot;#ff0000&quot;&gt;dlh-sales-git-pv&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="170" x="10" y="58.31999999999999" as="geometry" />
+        </mxCell>
+        <mxCell id="_qhj__XsBIJN-wBpZMDc-5" edge="1" parent="_qhj__XsBIJN-wBpZMDc-3" source="_qhj__XsBIJN-wBpZMDc-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;curved=1;curveGeometry=1;dashed=1;" target="_qhj__XsBIJN-wBpZMDc-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_qhj__XsBIJN-wBpZMDc-6" parent="_qhj__XsBIJN-wBpZMDc-3" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;align=left;spacingLeft=3;verticalAlign=top;" value="&lt;b&gt;POD&lt;/b&gt;&lt;br&gt;persistentVolumeClaim:&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;claimName:&amp;nbsp;&lt;span style=&quot;color: rgb(255, 51, 51);&quot;&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;dlh-sales-git-repo&lt;/font&gt;&lt;/span&gt;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="75.12" width="180" x="220" y="27.32" as="geometry" />
+        </mxCell>
+        <mxCell id="zncjRdtO8bDX_d91T64X-1" parent="_qhj__XsBIJN-wBpZMDc-3" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;align=left;spacingLeft=4;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;div style=&quot;&quot;&gt;&lt;b style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;Secret&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;metadata:&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&amp;nbsp; name: &lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;dlh-sales-github-read-token&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="49.88" width="170" x="10" y="164.76" as="geometry" />
+        </mxCell>
+        <mxCell id="_qhj__XsBIJN-wBpZMDc-19" edge="1" parent="_qhj__XsBIJN-wBpZMDc-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;curved=1;curveGeometry=1;dashed=1;">
+          <mxGeometry relative="1" x="0.0079" as="geometry">
+            <mxPoint x="310" y="453.67999999999984" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="F_GpAJ77gzrpd_FgnPgH-1" parent="_qhj__XsBIJN-wBpZMDc-1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;align=left;spacingLeft=3;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;PV&lt;/b&gt;&lt;br&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i style=&quot;&quot;&gt;metadata:&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i&gt;&amp;nbsp; name:&amp;nbsp;&lt;/i&gt;&lt;/font&gt;&lt;span style=&quot;background-color: transparent; font-size: 8px;&quot;&gt;&lt;font color=&quot;#ff3333&quot;&gt;&lt;i&gt;dlh-logistics-git-pv&lt;/i&gt;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i&gt;hostPath:&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i&gt;&amp;nbsp; &amp;nbsp; path: &quot;/mnt/git/dlh-sales&quot;&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i&gt;&amp;nbsp; &amp;nbsp; type: Directory&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="110" width="170" x="150" y="290.12000000000006" as="geometry" />
+        </mxCell>
+        <mxCell id="F_GpAJ77gzrpd_FgnPgH-2" parent="_qhj__XsBIJN-wBpZMDc-1" style="swimlane;whiteSpace=wrap;html=1;" value="dlh-logistics [namespace]" vertex="1">
+          <mxGeometry height="221.48" width="410" x="350" y="290.1199999999999" as="geometry">
+            <mxRectangle height="30" width="110" x="230" y="45.3599999999999" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="F_GpAJ77gzrpd_FgnPgH-3" parent="F_GpAJ77gzrpd_FgnPgH-2" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;align=left;spacingLeft=4;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;div style=&quot;&quot;&gt;&lt;b style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;PVC&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;metadata:&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&amp;nbsp; name: &lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;dlh-logistics-git-repo&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;spec:&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-size: 8px; background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;&amp;nbsp; volumeName:&lt;/span&gt;&lt;span style=&quot;font-size: 8px; background-color: transparent; color: light-dark(#FF0000,var(--ge-light-color, #ffffff));&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: transparent; font-size: 8px;&quot;&gt;&lt;font color=&quot;#ff0000&quot;&gt;dlh-logistics-git-pv&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="170" x="10" y="58.31999999999999" as="geometry" />
+        </mxCell>
+        <mxCell id="F_GpAJ77gzrpd_FgnPgH-4" edge="1" parent="F_GpAJ77gzrpd_FgnPgH-2" source="F_GpAJ77gzrpd_FgnPgH-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;curved=1;curveGeometry=1;dashed=1;" target="F_GpAJ77gzrpd_FgnPgH-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="F_GpAJ77gzrpd_FgnPgH-5" parent="F_GpAJ77gzrpd_FgnPgH-2" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;align=left;spacingLeft=3;verticalAlign=top;" value="&lt;b&gt;POD&lt;/b&gt;&lt;br&gt;persistentVolumeClaim:&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;claimName:&amp;nbsp;&lt;span style=&quot;color: rgb(255, 51, 51);&quot;&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;dlh-logistics-git-repo&lt;/font&gt;&lt;/span&gt;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="75.12" width="180" x="220" y="27.32" as="geometry" />
+        </mxCell>
+        <mxCell id="F_GpAJ77gzrpd_FgnPgH-8" parent="F_GpAJ77gzrpd_FgnPgH-2" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;align=left;spacingLeft=4;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;div style=&quot;&quot;&gt;&lt;b style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;Secret&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;metadata:&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&amp;nbsp; name: &lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;dlh-logistics-github-read-token&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="49.88" width="170" x="10" y="164.76" as="geometry" />
+        </mxCell>
+        <mxCell id="F_GpAJ77gzrpd_FgnPgH-10" edge="1" parent="_qhj__XsBIJN-wBpZMDc-1" source="F_GpAJ77gzrpd_FgnPgH-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;dashed=1;" target="F_GpAJ77gzrpd_FgnPgH-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="F_GpAJ77gzrpd_FgnPgH-11" edge="1" parent="_qhj__XsBIJN-wBpZMDc-1" source="_qhj__XsBIJN-wBpZMDc-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;dashed=1;" target="_qhj__XsBIJN-wBpZMDc-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="F_GpAJ77gzrpd_FgnPgH-12" parent="_qhj__XsBIJN-wBpZMDc-1" style="swimlane;whiteSpace=wrap;html=1;" value="dlh-cc [namespace] - Controll Plane" vertex="1">
+          <mxGeometry height="221.48" width="410" x="350" y="540.1199999999999" as="geometry">
+            <mxRectangle height="30" width="110" x="230" y="45.3599999999999" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="F_GpAJ77gzrpd_FgnPgH-13" parent="F_GpAJ77gzrpd_FgnPgH-12" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;align=left;spacingLeft=4;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;div style=&quot;&quot;&gt;&lt;b style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;PVC&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;metadata:&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&amp;nbsp; name: &lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;dlh-logistics-git-repo&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;spec:&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-size: 8px; background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;&amp;nbsp; volumeName:&lt;/span&gt;&lt;span style=&quot;font-size: 8px; background-color: transparent; color: light-dark(#FF0000,var(--ge-light-color, #ffffff));&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: transparent; font-size: 8px;&quot;&gt;&lt;font color=&quot;#ff0000&quot;&gt;dlh-logistics-git-pv&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="170" x="10" y="58.31999999999999" as="geometry" />
+        </mxCell>
+        <mxCell id="F_GpAJ77gzrpd_FgnPgH-14" edge="1" parent="F_GpAJ77gzrpd_FgnPgH-12" source="F_GpAJ77gzrpd_FgnPgH-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;curved=1;curveGeometry=1;dashed=1;" target="F_GpAJ77gzrpd_FgnPgH-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="F_GpAJ77gzrpd_FgnPgH-15" parent="F_GpAJ77gzrpd_FgnPgH-12" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;align=left;spacingLeft=3;verticalAlign=top;" value="&lt;b&gt;POD&lt;/b&gt;&lt;br&gt;persistentVolumeClaim:&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;claimName:&amp;nbsp;&lt;span style=&quot;color: rgb(255, 51, 51);&quot;&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;dlh-logistics-git-repo&lt;/font&gt;&lt;/span&gt;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="75.12" width="180" x="220" y="27.32" as="geometry" />
+        </mxCell>
+        <mxCell id="F_GpAJ77gzrpd_FgnPgH-16" parent="F_GpAJ77gzrpd_FgnPgH-12" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;align=left;spacingLeft=4;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;div style=&quot;&quot;&gt;&lt;b style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;Secret&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;metadata:&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&amp;nbsp; name: &lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;dlh-logistics-github-read-token&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="49.88" width="170" x="10" y="164.76" as="geometry" />
+        </mxCell>
+        <mxCell id="F_GpAJ77gzrpd_FgnPgH-17" parent="_qhj__XsBIJN-wBpZMDc-1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;align=left;spacingLeft=3;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;PV&lt;/b&gt;&lt;br&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i style=&quot;&quot;&gt;metadata:&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i&gt;&amp;nbsp; name:&amp;nbsp;&lt;/i&gt;&lt;/font&gt;&lt;span style=&quot;background-color: transparent; font-size: 8px;&quot;&gt;&lt;font color=&quot;#ff3333&quot;&gt;&lt;i&gt;dlh-cc-git-pv&lt;/i&gt;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i&gt;hostPath:&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i&gt;&amp;nbsp; &amp;nbsp; path: &quot;/mnt/git/&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;i&gt;&amp;nbsp; &amp;nbsp; type: Directory&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="110" width="170" x="150" y="540.1199999999999" as="geometry" />
+        </mxCell>
+        <mxCell id="F_GpAJ77gzrpd_FgnPgH-18" edge="1" parent="_qhj__XsBIJN-wBpZMDc-1" source="F_GpAJ77gzrpd_FgnPgH-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;dashed=1;" target="F_GpAJ77gzrpd_FgnPgH-17" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="F_GpAJ77gzrpd_FgnPgH-19" parent="_qhj__XsBIJN-wBpZMDc-1" style="rounded=0;whiteSpace=wrap;html=1;flipV=1;legacyAnchorPoints=0;flipH=1;textDirection=ltr;horizontal=0;fillColor=#dae8fc;strokeColor=#6c8ebf;verticalAlign=middle;align=right;spacingRight=7;" value="Shared Volume" vertex="1">
+          <mxGeometry height="493.28" width="110" x="10" y="156.84" as="geometry" />
+        </mxCell>
+        <mxCell id="F_GpAJ77gzrpd_FgnPgH-20" parent="_qhj__XsBIJN-wBpZMDc-1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;align=left;verticalAlign=top;" value="&lt;font style=&quot;font-size: 8px;&quot;&gt;/mnt/git&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;/mnt/dlh-dales&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;/mnt/dlh-logistics&lt;br&gt;/mnt/${domain}&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="133.28" width="90" x="20" y="266.84" as="geometry" />
+        </mxCell>
+        <mxCell id="F_GpAJ77gzrpd_FgnPgH-22" edge="1" parent="_qhj__XsBIJN-wBpZMDc-1" source="F_GpAJ77gzrpd_FgnPgH-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.618;entryDx=0;entryDy=0;entryPerimeter=0;defaultLabelBackgroundColor=page;" target="F_GpAJ77gzrpd_FgnPgH-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="F_GpAJ77gzrpd_FgnPgH-24" edge="1" parent="_qhj__XsBIJN-wBpZMDc-1" source="F_GpAJ77gzrpd_FgnPgH-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.03;entryY=0.11;entryDx=0;entryDy=0;entryPerimeter=0;defaultLabelBackgroundColor=page;" target="F_GpAJ77gzrpd_FgnPgH-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="F_GpAJ77gzrpd_FgnPgH-28" edge="1" parent="_qhj__XsBIJN-wBpZMDc-1" source="_qhj__XsBIJN-wBpZMDc-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.045;entryY=0.885;entryDx=0;entryDy=0;entryPerimeter=0;defaultLabelBackgroundColor=page;" target="F_GpAJ77gzrpd_FgnPgH-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <UserObject label="&lt;font style=&quot;&quot;&gt;&lt;span style=&quot;font-weight: bold; font-size: 16px;&quot;&gt;GitHub Container Registry&lt;/span&gt;&lt;br&gt;&lt;br&gt;&lt;div style=&quot;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;/font&gt;" link="https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry" linkTarget="_blank" id="F_GpAJ77gzrpd_FgnPgH-29">
+          <mxCell parent="1" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;strokeColor=#b85450;fillColor=#f8cecc;verticalAlign=top;align=left;spacingRight=0;spacingLeft=8;" vertex="1">
+            <mxGeometry height="180" width="360" x="3850" y="-213" as="geometry" />
+          </mxCell>
+        </UserObject>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="Deployment #1" id="v84i5dbOx2EDjL0AtEJt">
+    <mxGraphModel dx="662" dy="1035" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="Tzn-aMyyNsZZqZtCVxT8-0" />
+        <mxCell id="Tzn-aMyyNsZZqZtCVxT8-1" parent="Tzn-aMyyNsZZqZtCVxT8-0" />
+        <mxCell id="Tzn-aMyyNsZZqZtCVxT8-33" parent="Tzn-aMyyNsZZqZtCVxT8-1" style="swimlane;whiteSpace=wrap;html=1;" value="Kubernetes Cluster" vertex="1">
+          <mxGeometry height="590" width="1060" x="1130" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Tzn-aMyyNsZZqZtCVxT8-34" parent="Tzn-aMyyNsZZqZtCVxT8-33" style="swimlane;whiteSpace=wrap;html=1;" value="dlh-sales [namespace]" vertex="1">
+          <mxGeometry height="300" width="490" x="10" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tMnmU7d9lIkOP1ExRvBb-3" connectable="0" parent="Tzn-aMyyNsZZqZtCVxT8-34" style="group" value="" vertex="1">
+          <mxGeometry height="100" width="160" x="10" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tMnmU7d9lIkOP1ExRvBb-1" parent="tMnmU7d9lIkOP1ExRvBb-3" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" value="&lt;b&gt;Secrets&lt;/b&gt;" vertex="1">
+          <mxGeometry height="100" width="160" as="geometry" />
+        </mxCell>
+        <mxCell id="tMnmU7d9lIkOP1ExRvBb-2" parent="tMnmU7d9lIkOP1ExRvBb-3" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fontSize=10;verticalAlign=top;" value="&lt;b&gt;github-sales-read-token&lt;/b&gt;" vertex="1">
+          <mxGeometry height="30" width="140" x="10" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tMnmU7d9lIkOP1ExRvBb-8" connectable="0" parent="Tzn-aMyyNsZZqZtCVxT8-34" style="group" value="" vertex="1">
+          <mxGeometry height="100" width="210" x="180" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tMnmU7d9lIkOP1ExRvBb-5" parent="tMnmU7d9lIkOP1ExRvBb-8" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" value="&lt;b&gt;PersistentVolumeClaim&lt;/b&gt;" vertex="1">
+          <mxGeometry height="100" width="210" as="geometry" />
+        </mxCell>
+        <mxCell id="tMnmU7d9lIkOP1ExRvBb-6" parent="tMnmU7d9lIkOP1ExRvBb-8" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fontSize=10;align=center;verticalAlign=top;" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;&lt;b&gt;dlh-sales-repo&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;storageClassName: &lt;i&gt;git-hostpath-delete&lt;/i&gt;" vertex="1">
+          <mxGeometry height="40" width="184.33333333333334" x="11.666666666666657" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tMnmU7d9lIkOP1ExRvBb-9" connectable="0" parent="Tzn-aMyyNsZZqZtCVxT8-33" style="group" value="" vertex="1">
+          <mxGeometry height="90" width="160" x="440" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="tMnmU7d9lIkOP1ExRvBb-10" parent="tMnmU7d9lIkOP1ExRvBb-9" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" value="&lt;b&gt;StorageClass&lt;/b&gt;" vertex="1">
+          <mxGeometry height="90.00000000000001" width="160" as="geometry" />
+        </mxCell>
+        <mxCell id="tMnmU7d9lIkOP1ExRvBb-11" parent="tMnmU7d9lIkOP1ExRvBb-9" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fontSize=10;verticalAlign=top;" value="&lt;b&gt;git-hostpath-delete&lt;/b&gt;" vertex="1">
+          <mxGeometry height="27" width="140" x="10" y="22.90909090909091" as="geometry" />
+        </mxCell>
+        <mxCell id="tMnmU7d9lIkOP1ExRvBb-17" connectable="0" parent="Tzn-aMyyNsZZqZtCVxT8-33" style="group" value="" vertex="1">
+          <mxGeometry height="100" width="210" x="10" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="tMnmU7d9lIkOP1ExRvBb-18" parent="tMnmU7d9lIkOP1ExRvBb-17" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" value="&lt;b&gt;PersistentVolume&lt;/b&gt;" vertex="1">
+          <mxGeometry height="100" width="210" as="geometry" />
+        </mxCell>
+        <mxCell id="tMnmU7d9lIkOP1ExRvBb-19" parent="tMnmU7d9lIkOP1ExRvBb-17" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fontSize=10;align=center;verticalAlign=top;" value="&lt;div style=&quot;&quot;&gt;&lt;b&gt;git-shared-volume&lt;/b&gt;&lt;/div&gt;storageClassName: &lt;i&gt;git-hostpath-delete&lt;/i&gt;" vertex="1">
+          <mxGeometry height="40" width="184.33333333333334" x="9.996666666666657" y="24.5" as="geometry" />
+        </mxCell>
+        <mxCell id="tMnmU7d9lIkOP1ExRvBb-20" edge="1" parent="Tzn-aMyyNsZZqZtCVxT8-33" source="tMnmU7d9lIkOP1ExRvBb-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;curved=1;curveGeometry=1;dashed=1;" target="tMnmU7d9lIkOP1ExRvBb-19">
+          <mxGeometry relative="1" x="0.0107" as="geometry">
+            <Array as="points">
+              <mxPoint x="340" y="520" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tMnmU7d9lIkOP1ExRvBb-22" edge="1" parent="Tzn-aMyyNsZZqZtCVxT8-33" source="tMnmU7d9lIkOP1ExRvBb-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;dashed=1;curved=1;curveGeometry=1;" target="tMnmU7d9lIkOP1ExRvBb-11">
+          <mxGeometry relative="1" x="0.0051" as="geometry">
+            <Array as="points">
+              <mxPoint x="230" y="404.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tMnmU7d9lIkOP1ExRvBb-23" parent="Tzn-aMyyNsZZqZtCVxT8-33" style="swimlane;whiteSpace=wrap;html=1;" value="dlh-logistics [namespace]" vertex="1">
+          <mxGeometry height="300" width="490" x="550" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tMnmU7d9lIkOP1ExRvBb-24" connectable="0" parent="tMnmU7d9lIkOP1ExRvBb-23" style="group" value="" vertex="1">
+          <mxGeometry height="100" width="160" x="230" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tMnmU7d9lIkOP1ExRvBb-25" parent="tMnmU7d9lIkOP1ExRvBb-24" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" value="&lt;b&gt;Secrets&lt;/b&gt;" vertex="1">
+          <mxGeometry height="100" width="160" as="geometry" />
+        </mxCell>
+        <mxCell id="tMnmU7d9lIkOP1ExRvBb-26" parent="tMnmU7d9lIkOP1ExRvBb-24" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fontSize=10;verticalAlign=top;" value="&lt;b&gt;github-logistics-read-token&lt;/b&gt;" vertex="1">
+          <mxGeometry height="30" width="140" x="10" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tMnmU7d9lIkOP1ExRvBb-27" connectable="0" parent="tMnmU7d9lIkOP1ExRvBb-23" style="group" value="" vertex="1">
+          <mxGeometry height="100" width="210" x="10" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tMnmU7d9lIkOP1ExRvBb-28" parent="tMnmU7d9lIkOP1ExRvBb-27" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" value="&lt;b&gt;PersistentVolumeClaim&lt;/b&gt;" vertex="1">
+          <mxGeometry height="100" width="210" as="geometry" />
+        </mxCell>
+        <mxCell id="tMnmU7d9lIkOP1ExRvBb-29" parent="tMnmU7d9lIkOP1ExRvBb-27" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fontSize=10;align=center;verticalAlign=top;" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;&lt;b&gt;dlh-logistics-repo&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;storageClassName: &lt;i&gt;git-hostpath-delete&lt;/i&gt;" vertex="1">
+          <mxGeometry height="40" width="184.33333333333334" x="11.666666666666657" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tMnmU7d9lIkOP1ExRvBb-30" edge="1" parent="Tzn-aMyyNsZZqZtCVxT8-33" source="tMnmU7d9lIkOP1ExRvBb-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;curved=1;curveGeometry=1;dashed=1;" target="tMnmU7d9lIkOP1ExRvBb-11">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="750" y="404.5" />
+              <mxPoint x="520" y="404.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Tzn-aMyyNsZZqZtCVxT8-50" parent="Tzn-aMyyNsZZqZtCVxT8-1" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#666666;spacing=6;" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;Problemy&lt;/font&gt;&lt;/h1&gt;&lt;p style=&quot;line-height: 100%;&quot;&gt;-&amp;nbsp;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="150" width="1060" x="1120" y="680" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="KdMQdvAmmPuaOwocmwnO" name="Deployment - Ideas">
+    <mxGraphModel dx="1676" dy="1491" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-10" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="DBT Runner - Image" vertex="1">
+          <mxGeometry height="180" width="280" x="1120" y="235" as="geometry">
+            <mxRectangle height="30" width="160" x="640" y="400" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-13" parent="Qqju6IPR1O_APdjEmp0x-10" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=0;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=none;" value="" vertex="1">
+          <mxGeometry height="120" width="260" x="10" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-14" parent="Qqju6IPR1O_APdjEmp0x-13" style="text;strokeColor=#DFDFDF;fillColor=#FFFFFF;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;shape=mxgraph.bootstrap.topButton;rSize=5;fontColor=#333333;" value="Python" vertex="1">
+          <mxGeometry height="30" width="260" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-15" parent="Qqju6IPR1O_APdjEmp0x-13" style="text;strokeColor=#DFDFDF;fillColor=#FFFFFF;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;rSize=5;fontColor=#333333;" value="dbt-core, dbt-{module}" vertex="1">
+          <mxGeometry height="30" width="260" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-16" parent="Qqju6IPR1O_APdjEmp0x-13" style="text;strokeColor=#DFDFDF;fillColor=#FFFFFF;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;shape=mxgraph.bootstrap.bottomButton;rSize=5;fontColor=#333333;" value="" vertex="1">
+          <mxGeometry height="30" width="260" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-17" parent="Qqju6IPR1O_APdjEmp0x-13" style="text;strokeColor=#DFDFDF;fillColor=#FFFFFF;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;shape=mxgraph.bootstrap.bottomButton;rSize=5;fontColor=#333333;" value="" vertex="1">
+          <mxGeometry height="30" width="260" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-11" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Airflow - Image" vertex="1">
+          <mxGeometry height="180" width="280" x="1120" y="40" as="geometry">
+            <mxRectangle height="30" width="130" x="1580" y="220" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-18" parent="Qqju6IPR1O_APdjEmp0x-11" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=0;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=none;" value="" vertex="1">
+          <mxGeometry height="120" width="260" x="10" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-19" parent="Qqju6IPR1O_APdjEmp0x-18" style="text;strokeColor=#DFDFDF;fillColor=#FFFFFF;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;shape=mxgraph.bootstrap.topButton;rSize=5;fontColor=#333333;" value="Airflow" vertex="1">
+          <mxGeometry height="30" width="260" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-20" parent="Qqju6IPR1O_APdjEmp0x-18" style="text;strokeColor=#DFDFDF;fillColor=#FFFFFF;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;rSize=5;fontColor=#333333;" value="Astronomer Cosmos" vertex="1">
+          <mxGeometry height="30" width="260" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-21" parent="Qqju6IPR1O_APdjEmp0x-18" style="text;strokeColor=#DFDFDF;fillColor=#FFFFFF;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;shape=mxgraph.bootstrap.bottomButton;rSize=5;fontColor=#333333;" value="" vertex="1">
+          <mxGeometry height="30" width="260" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-22" parent="Qqju6IPR1O_APdjEmp0x-18" style="text;strokeColor=#DFDFDF;fillColor=#FFFFFF;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;shape=mxgraph.bootstrap.bottomButton;rSize=5;fontColor=#333333;" value="" vertex="1">
+          <mxGeometry height="30" width="260" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-24" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Kubernetes Cluster" vertex="1">
+          <mxGeometry height="450" width="700" x="1450" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-31" parent="Qqju6IPR1O_APdjEmp0x-24" style="swimlane;whiteSpace=wrap;html=1;" value="airflow - namespace" vertex="1">
+          <mxGeometry height="310" width="320" x="10" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-33" parent="Qqju6IPR1O_APdjEmp0x-31" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="API Server" vertex="1">
+          <mxGeometry height="60" width="120" x="30" y="132.5" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-34" parent="Qqju6IPR1O_APdjEmp0x-31" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="Dag Processor" vertex="1">
+          <mxGeometry height="60" width="120" x="180" y="132.5" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-35" parent="Qqju6IPR1O_APdjEmp0x-31" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="Scheduler" vertex="1">
+          <mxGeometry height="60" width="120" x="30" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-36" parent="Qqju6IPR1O_APdjEmp0x-31" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="GitSync - sidecar" vertex="1">
+          <mxGeometry height="60" width="120" x="100" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-89" parent="Qqju6IPR1O_APdjEmp0x-24" style="swimlane;whiteSpace=wrap;html=1;" value="dbservices - namespace" vertex="1">
+          <mxGeometry height="120" width="290" x="400" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-90" parent="Qqju6IPR1O_APdjEmp0x-89" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="postgresql" vertex="1">
+          <mxGeometry height="60" width="120" x="85" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="fTy3756jpaI1f2y4CN7L-1" parent="Qqju6IPR1O_APdjEmp0x-24" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="Shared Volume" vertex="1">
+          <mxGeometry height="60" width="120" x="460" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-25" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="SQL DB - Image (external)" vertex="1">
+          <mxGeometry height="180" width="280" x="1120" y="435" as="geometry">
+            <mxRectangle height="30" width="160" x="640" y="400" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-26" parent="Qqju6IPR1O_APdjEmp0x-25" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=0;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=none;" value="" vertex="1">
+          <mxGeometry height="120" width="260" x="10" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-27" parent="Qqju6IPR1O_APdjEmp0x-26" style="text;strokeColor=#DFDFDF;fillColor=#FFFFFF;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;shape=mxgraph.bootstrap.topButton;rSize=5;fontColor=#333333;" value="PostgreSQL" vertex="1">
+          <mxGeometry height="30" width="260" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-28" parent="Qqju6IPR1O_APdjEmp0x-26" style="text;strokeColor=#DFDFDF;fillColor=#FFFFFF;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;rSize=5;fontColor=#333333;" value="" vertex="1">
+          <mxGeometry height="30" width="260" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-29" parent="Qqju6IPR1O_APdjEmp0x-26" style="text;strokeColor=#DFDFDF;fillColor=#FFFFFF;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;shape=mxgraph.bootstrap.bottomButton;rSize=5;fontColor=#333333;" value="" vertex="1">
+          <mxGeometry height="30" width="260" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-30" parent="Qqju6IPR1O_APdjEmp0x-26" style="text;strokeColor=#DFDFDF;fillColor=#FFFFFF;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;shape=mxgraph.bootstrap.bottomButton;rSize=5;fontColor=#333333;" value="" vertex="1">
+          <mxGeometry height="30" width="260" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-80" edge="1" parent="1" source="Qqju6IPR1O_APdjEmp0x-37" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;curved=1;curveGeometry=1;dashed=1;" target="Qqju6IPR1O_APdjEmp0x-36">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-37" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Git Repo - Finance" vertex="1">
+          <mxGeometry height="110" width="240" x="1450" y="540" as="geometry">
+            <mxRectangle height="30" width="160" x="640" y="400" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-81" edge="1" parent="1" source="Qqju6IPR1O_APdjEmp0x-43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;curved=1;curveGeometry=1;dashed=1;" target="Qqju6IPR1O_APdjEmp0x-36">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1830" y="500" />
+              <mxPoint x="1620" y="500" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-43" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Git Repo - Sales" vertex="1">
+          <mxGeometry height="110" width="240" x="1710" y="540" as="geometry">
+            <mxRectangle height="30" width="160" x="640" y="400" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-61" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Kubernetes Cluster" vertex="1">
+          <mxGeometry height="485" width="700" x="2240" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-62" parent="Qqju6IPR1O_APdjEmp0x-61" style="swimlane;whiteSpace=wrap;html=1;" value="dlh-logistics - namespace" vertex="1">
+          <mxGeometry height="300" width="320" x="10" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-63" parent="Qqju6IPR1O_APdjEmp0x-62" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="API Server" vertex="1">
+          <mxGeometry height="60" width="120" x="30" y="132.5" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-64" parent="Qqju6IPR1O_APdjEmp0x-62" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="Dag Processor" vertex="1">
+          <mxGeometry height="60" width="120" x="180" y="132.5" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-65" parent="Qqju6IPR1O_APdjEmp0x-62" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="Scheduler" vertex="1">
+          <mxGeometry height="60" width="120" x="30" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-66" parent="Qqju6IPR1O_APdjEmp0x-62" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="GitSync - sidecar" vertex="1">
+          <mxGeometry height="60" width="120" x="100" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-75" parent="Qqju6IPR1O_APdjEmp0x-61" style="swimlane;whiteSpace=wrap;html=1;" value="dlh-sales - namespace" vertex="1">
+          <mxGeometry height="300" width="320" x="350" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-76" parent="Qqju6IPR1O_APdjEmp0x-75" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="API Server" vertex="1">
+          <mxGeometry height="60" width="120" x="30" y="132.5" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-77" parent="Qqju6IPR1O_APdjEmp0x-75" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="Dag Processor" vertex="1">
+          <mxGeometry height="60" width="120" x="180" y="132.5" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-78" parent="Qqju6IPR1O_APdjEmp0x-75" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="Scheduler" vertex="1">
+          <mxGeometry height="60" width="120" x="30" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-79" parent="Qqju6IPR1O_APdjEmp0x-75" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="GitSync - sidecar" vertex="1">
+          <mxGeometry height="60" width="120" x="100" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-84" parent="Qqju6IPR1O_APdjEmp0x-61" style="swimlane;whiteSpace=wrap;html=1;" value="dbservices - namespace" vertex="1">
+          <mxGeometry height="120" width="290" x="190" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-88" parent="Qqju6IPR1O_APdjEmp0x-84" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="postgresql" vertex="1">
+          <mxGeometry height="60" width="120" x="85" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-82" edge="1" parent="1" source="Qqju6IPR1O_APdjEmp0x-73" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;curved=1;curveGeometry=1;dashed=1;" target="Qqju6IPR1O_APdjEmp0x-66">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-73" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Git Repo - Finance" vertex="1">
+          <mxGeometry height="110" width="240" x="2290" y="540" as="geometry">
+            <mxRectangle height="30" width="160" x="640" y="400" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-83" edge="1" parent="1" source="Qqju6IPR1O_APdjEmp0x-74" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;curved=1;curveGeometry=1;dashed=1;" target="Qqju6IPR1O_APdjEmp0x-79">
+          <mxGeometry relative="1" x="0.0057" as="geometry" />
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-74" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Git Repo - Sales" vertex="1">
+          <mxGeometry height="110" width="240" x="2630" y="540" as="geometry">
+            <mxRectangle height="30" width="160" x="640" y="400" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Qqju6IPR1O_APdjEmp0x-91" parent="1" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#666666;spacing=6;" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;Problemy&lt;/font&gt;&lt;/h1&gt;&lt;p style=&quot;line-height: 100%;&quot;&gt;-&amp;nbsp;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="150" width="1060" x="1120" y="680" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
