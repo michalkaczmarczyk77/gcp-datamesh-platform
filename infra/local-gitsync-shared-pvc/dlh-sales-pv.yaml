@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: dlh-sales-git-pv
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ""
+  claimRef:
+    namespace: dlh-sales
+    name: dlh-sales-git-repo
+  hostPath:
+    path: /mnt/git/dlh-sales
+    type: DirectoryOrCreate

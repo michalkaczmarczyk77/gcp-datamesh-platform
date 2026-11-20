@@ -45,6 +45,14 @@ dagProcessor:
   resources:
     requests: { cpu: "250m", memory: "512Mi" }
     limits: { cpu: "1", memory: "1Gi" }
+#  extraVolumes:
+#    - name: dbt-releases
+#      persistentVolumeClaim:
+#        claimName: dbt-releases
+#  extraVolumeMounts:
+#    - name: dbt-releases
+#      mountPath: /opt/dbt-releases
+#      readOnly: true
 
 scheduler:
   replicas: 1

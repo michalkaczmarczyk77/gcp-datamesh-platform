@@ -1,0 +1,96 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pod2
+  labels:
+    app: pod2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pod2
+  template:
+    metadata:
+      labels:
+        app: pod2
+    spec:
+      securityContext:
+        fsGroup: 65533
+
+      containers:
+        - name: python
+          image: python:3.14-slim
+          imagePullPolicy: IfNotPresent
+
+          # Replace this with the actual command for your application.
+          command:
+            - python
+            - -c
+          args:
+            - |
+              import time
+              print("pod2 started", flush=True)
+              time.sleep(10**9)
+
+          volumeMounts:
+            - name: shared-repositories
+              mountPath: /shared
+              subPath: pod2
+
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+
+        - name: git-sync
+          image: registry.k8s.io/git-sync/git-sync:v4.4.2
+          imagePullPolicy: IfNotPresent
+
+          env:
+            - name: GITSYNC_REPO
+              value: "https://github.com/YOUR_ORG/REPO2.git"
+
+            - name: GITSYNC_REF
+              value: "main"
+
+            - name: GITSYNC_ROOT
+              value: "/git"
+
+            - name: GITSYNC_LINK
+              value: "current"
+
+            - name: GITSYNC_PERIOD
+              value: "30s"
+
+            - name: GITSYNC_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: github-read-token
+                  key: username
+
+            - name: GITSYNC_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: github-read-token
+                  key: password
+
+          volumeMounts:
+            - name: shared-repositories
+              mountPath: /git
+              subPath: pod2
+
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "32Mi"
+            limits:
+              cpu: "200m"
+              memory: "128Mi"
+
+      volumes:
+        - name: shared-repositories
+          persistentVolumeClaim:
+            claimName: shared-repos

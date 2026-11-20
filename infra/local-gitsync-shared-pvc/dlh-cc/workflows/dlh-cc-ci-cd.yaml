@@ -1,0 +1,276 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+env:
+  REGISTRY: ghcr.io
+
+  # Replace with your GitHub organization or username.
+  IMAGE_NAMESPACE: example-org
+
+  APPLICATION_IMAGE_NAME: example-application
+
+  SIDECAR_IMAGE_NAME: git-repository-sidecar
+
+  # Repository cloned by the Kubernetes sidecar.
+  DEPLOYMENT_REPOSITORY: https://github.com/example-org/example-application.git
+
+  DEPLOYMENT_BRANCH: main
+
+  DEPLOYMENT_NAMESPACE: example-application
+
+  DEPLOYMENT_RUNNER_NAMESPACE: deployment-runner
+
+jobs:
+  validate:
+    name: Validate source code
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run lint
+        run: npm run lint --if-present
+
+      - name: Run unit tests
+        run: npm test --if-present
+
+  build-and-push:
+    name: Build and publish container images
+    runs-on: ubuntu-latest
+    needs:
+      - validate
+
+    permissions:
+      contents: read
+      packages: write
+
+    outputs:
+      application_image: ${{ steps.metadata.outputs.application_image }}
+      sidecar_image: ${{ steps.metadata.outputs.sidecar_image }}
+      image_tag: ${{ steps.metadata.outputs.image_tag }}
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set image metadata
+        id: metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          IMAGE_TAG="${GITHUB_SHA}"
+
+          APPLICATION_IMAGE="${REGISTRY}/${IMAGE_NAMESPACE}/${APPLICATION_IMAGE_NAME}:${IMAGE_TAG}"
+          SIDECAR_IMAGE="${REGISTRY}/${IMAGE_NAMESPACE}/${SIDECAR_IMAGE_NAME}:${IMAGE_TAG}"
+
+          echo "application_image=${APPLICATION_IMAGE}" >> "${GITHUB_OUTPUT}"
+          echo "sidecar_image=${SIDECAR_IMAGE}" >> "${GITHUB_OUTPUT}"
+          echo "image_tag=${IMAGE_TAG}" >> "${GITHUB_OUTPUT}"
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push application image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: |
+            ${{ steps.metadata.outputs.application_image }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAMESPACE }}/${{ env.APPLICATION_IMAGE_NAME }}:main
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Build and push Git sidecar image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./sidecar
+          file: ./sidecar/Dockerfile
+          push: true
+          tags: |
+            ${{ steps.metadata.outputs.sidecar_image }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAMESPACE }}/${{ env.SIDECAR_IMAGE_NAME }}:main
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy:
+    name: Deploy through Kubernetes sidecar Job
+    runs-on: ubuntu-latest
+    needs:
+      - build-and-push
+
+    permissions:
+      contents: read
+      packages: read
+
+    environment:
+      name: production
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Install kubectl
+        uses: azure/setup-kubectl@v4
+        with:
+          version: latest
+
+      - name: Configure Kubernetes credentials
+        shell: bash
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+        run: |
+          set -euo pipefail
+
+          mkdir -p "${HOME}/.kube"
+
+          echo "${KUBE_CONFIG_DATA}" \
+            | base64 --decode \
+            > "${HOME}/.kube/config"
+
+          chmod 600 "${HOME}/.kube/config"
+
+      - name: Verify Kubernetes access
+        run: |
+          kubectl cluster-info
+          kubectl auth can-i create jobs \
+            --namespace="${DEPLOYMENT_RUNNER_NAMESPACE}"
+
+      - name: Create or update GitHub repository access Secret
+        shell: bash
+        env:
+          GITHUB_REPOSITORY_TOKEN: ${{ secrets.DEPLOYMENT_REPOSITORY_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          kubectl create namespace "${DEPLOYMENT_RUNNER_NAMESPACE}" \
+            --dry-run=client \
+            --output=yaml \
+            | kubectl apply -f -
+
+          kubectl create secret generic github-repository-token \
+            --namespace="${DEPLOYMENT_RUNNER_NAMESPACE}" \
+            --from-literal=token="${GITHUB_REPOSITORY_TOKEN}" \
+            --dry-run=client \
+            --output=yaml \
+            | kubectl apply -f -
+
+      - name: Create target namespace
+        run: |
+          kubectl create namespace "${DEPLOYMENT_NAMESPACE}" \
+            --dry-run=client \
+            --output=yaml \
+            | kubectl apply -f -
+
+      - name: Render deployment Job
+        shell: bash
+        env:
+          RUN_ID: ${{ github.run_id }}-${{ github.run_attempt }}
+          SIDECAR_IMAGE_TAG: ${{ needs.build-and-push.outputs.image_tag }}
+          GIT_REPOSITORY: ${{ env.DEPLOYMENT_REPOSITORY }}
+          GIT_BRANCH: ${{ env.DEPLOYMENT_BRANCH }}
+          TARGET_NAMESPACE: ${{ env.DEPLOYMENT_NAMESPACE }}
+        run: |
+          set -euo pipefail
+
+          JOB_NAME="repository-deployment-${RUN_ID}"
+
+          # Kubernetes names must contain only lowercase alphanumeric
+          # characters and hyphens.
+          JOB_NAME="$(echo "${JOB_NAME}" \
+            | tr '[:upper:]' '[:lower:]' \
+            | tr '_' '-' \
+            | sed 's/[^a-z0-9-]/-/g' \
+            | cut -c1- fifty 2>/dev/null || true)"
+
+          # The following line is intentionally simple for a scaffold.
+          # Use a deterministic short name for the actual manifest.
+          JOB_NAME="repository-deployment-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+
+          sed \
+            -e "s|\${RUN_ID}|${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}|g" \
+            -e "s|\${SIDECAR_IMAGE_TAG}|${SIDECAR_IMAGE_TAG}|g" \
+            -e "s|\${GIT_REPOSITORY}|${GIT_REPOSITORY}|g" \
+            -e "s|\${GIT_BRANCH}|${GIT_BRANCH}|g" \
+            -e "s|\${TARGET_NAMESPACE}|${TARGET_NAMESPACE}|g" \
+            k8s/deployment-job.yaml \
+            > /tmp/deployment-job.yaml
+
+          kubectl apply -f /tmp/deployment-job.yaml
+
+      - name: Wait for deployment Job
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          JOB_NAME="repository-deployment-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+
+          kubectl wait \
+            --namespace="${DEPLOYMENT_RUNNER_NAMESPACE}" \
+            --for=condition=complete \
+            --timeout=30m \
+            "job/${JOB_NAME}"
+
+      - name: Print deployment logs
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          JOB_NAME="repository-deployment-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+
+          kubectl logs \
+            --namespace="${DEPLOYMENT_RUNNER_NAMESPACE}" \
+            "job/${JOB_NAME}" \
+            --all-containers=true \
+            --prefix=true \
+            || true
+
+      - name: Collect Job diagnostics on failure
+        if: failure()
+        shell: bash
+        run: |
+          set +e
+
+          JOB_NAME="repository-deployment-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+
+          kubectl describe job \
+            --namespace="${DEPLOYMENT_RUNNER_NAMESPACE}" \
+            "${JOB_NAME}"
+
+          kubectl get pods \
+            --namespace="${DEPLOYMENT_RUNNER_NAMESPACE}" \
+            --selector="job-name=${JOB_NAME}" \
+            --output=wide
+
+          kubectl describe pods \
+            --namespace="${DEPLOYMENT_RUNNER_NAMESPACE}" \
+            --selector="job-name=${JOB_NAME}"

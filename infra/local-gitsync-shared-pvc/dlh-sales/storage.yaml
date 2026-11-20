@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dlh-sales-git-repo
+  namespace: dlh-sales
+  labels:
+    app: dlh-sales-platform
+    env: prod
+spec:
+  storageClassName: ""
+  volumeName: dlh-sales-git-pv
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+

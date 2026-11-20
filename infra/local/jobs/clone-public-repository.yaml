@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: clone-dbt-repository
+  namespace: airflow
+spec:
+  backoffLimit: 2
+  ttlSecondsAfterFinished: 3600
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: git-clone
+          image: alpine/git:2.47.2
+          command: ["/bin/sh", "-c"]
+          args:
+            - git clone --branch main --single-branch --depth 1
+              https://github.com/michalkaczmarczyk77/gcp-datamesh-platform
+              /data/gcp-datamesh-platform
+          volumeMounts:
+            - name: dbt-releases
+              mountPath: /data
+      volumes:
+        - name: dbt-releases
+          persistentVolumeClaim:
+            claimName: dbt-releases

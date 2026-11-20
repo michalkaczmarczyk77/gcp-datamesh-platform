@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dlh-cc-pod1
+  namespace: dlh-cc
+  labels:
+    app: dlh-cc-platform
+    env: prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dlh-cc-platform
+  template:
+    metadata:
+      labels:
+        app: dlh-cc-platform
+    spec:
+      securityContext:
+        fsGroup: 65533
+
+      containers:
+        - name: python
+          image: python:3.14-slim
+          imagePullPolicy: IfNotPresent
+
+          # Replace this with the actual command for your application.
+          command:
+            - python
+            - -c
+          args:
+            - |
+              import time
+              print("pod1 started", flush=True)
+              time.sleep(10**9)
+
+          volumeMounts:
+            - name: dlh-cc-repo
+              mountPath: /shared
+              #subPath: dlh-cc
+
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+
+      volumes:
+        - name: dlh-cc-repo
+          persistentVolumeClaim:
+            claimName: dlh-cc-git-repo

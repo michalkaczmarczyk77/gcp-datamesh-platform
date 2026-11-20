@@ -1,0 +1,41 @@
+# These dynamic classes are not used by the static /mnt/git PVCs.
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: git-hostpath-delete
+provisioner: microk8s.io/hostpath
+reclaimPolicy: Delete
+#volumeBindingMode: WaitForFirstConsumer
+volumeBindingMode: Immediate
+allowVolumeExpansion: true
+
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: git-hostpath-retain
+provisioner: microk8s.io/hostpath
+reclaimPolicy: Retain
+#volumeBindingMode: WaitForFirstConsumer
+volumeBindingMode: Immediate
+allowVolumeExpansion: true
+
+#apiVersion: storage.k8s.io/v1
+#kind: StorageClass
+#metadata:
+#  name: local-storage
+#provisioner: kubernetes.io/no-provisioner
+#volumeBindingMode: WaitForFirstConsumer
+
+#apiVersion: storage.k8s.io/v1
+#kind: StorageClass
+#metadata:
+#  name: efs-rwx
+#provisioner: efs.csi.aws.com
+#parameters:
+#  provisioningMode: efs-ap
+#  fileSystemId: fs-REPLACE_WITH_YOUR_ID
+#  directoryPerms: "0770"
+#  basePath: "/k8s"
+#reclaimPolicy: Retain
+#volumeBindingMode: Immediate

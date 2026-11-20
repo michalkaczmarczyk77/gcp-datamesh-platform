@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: shared-repos
+  namespace: gitsync-shared
+spec:
+  storageClassName: ""
+  volumeName: gitsync-shared-pv
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  # Uncomment and replace if your cluster requires a specific RWX StorageClass:
+  # storageClassName: nfs-client
+
+---
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+#  name: task-pv2-claim
+#  namespace: task-pv2
+#  labels:
+#    app: test-app
+#    env: prod
+#spec:
+#  storageClassName: manual
+#  accessModes:
+#    - ReadWriteMany
+#  resources:
+#    requests:
+#      storage: 10Gi
+#  volumeName: task-pv2-volume
